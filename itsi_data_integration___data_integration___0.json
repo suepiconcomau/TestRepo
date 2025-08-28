@@ -1,1 +1,577 @@
-[{"data_source": "appdynamics", "ingestion_method": {"type": "INDEXED_DATA", "value": "index=main sourcetype=appdynamics_summary", "time_range": {"earliest": "-24h", "latest": "now"}}, "mapped_fields": {"src": {"name": "src", "display_name": "Source", "type": "source_field", "input_type": "composition", "values": ["{src}"], "default_value": "appdynamics"}, "signature": {"name": "signature", "display_name": "Signature", "type": "notable_event_field", "input_type": "composition", "values": ["{signature}"], "default_value": "default_appdynamics_signature"}, "vendor_severity": {"name": "vendor_severity", "display_name": "Vendor Severity", "type": "notable_event_field", "input_type": "composition", "values": ["{vendor_severity}"], "default_value": "OK"}, "severity_id": {"name": "severity_id", "display_name": "Severity ID", "type": "notable_event_field", "input_type": "composition", "values": ["{severity_id}"], "default_value": "1"}, "title": {"name": "title", "display_name": "Title", "type": "notable_event_field", "input_type": "composition", "values": ["{signature}"], "default_value": "default_title"}, "owner": {"name": "owner", "display_name": "Owner", "type": "notable_event_field", "input_type": "composition", "values": ["unassigned"], "default_value": "unassigned"}, "status": {"name": "status", "display_name": "Status", "type": "notable_event_field", "input_type": "composition", "values": ["1"], "default_value": "1"}, "subcomponent": {"name": "subcomponent", "display_name": "Subcomponent", "type": "notable_event_field", "input_type": "mapping_rule", "rule_type": "coalesce", "values": ["{subcomponent}", ["-"]]}, "description": {"name": "description", "display_name": "Description", "type": "notable_event_field", "input_type": "composition", "values": ["{description}"]}, "app": {"name": "app", "display_name": "App", "type": "notable_event_field", "input_type": "composition", "values": ["{app}"]}, "itsiDrilldownSearch": {"name": "itsiDrilldownSearch", "display_name": "ITSI Drilldown Search", "type": "notable_event_field", "input_type": "composition", "values": ["{itsiDrilldownSearch}"]}, "itsiDrilldownEarliestOffset": {"name": "itsiDrilldownEarliestOffset", "display_name": "ITSI Drilldown earliest offset", "type": "notable_event_field", "input_type": "mapping_rule", "rule_type": "coalesce", "values": ["{itsiDrilldownEarliestOffset}", ["-900"]], "default_value": "-900"}, "itsiDrilldownLatestOffset": {"name": "itsiDrilldownLatestOffset", "display_name": "ITSI Drilldown latest offset", "type": "notable_event_field", "input_type": "mapping_rule", "rule_type": "coalesce", "values": ["{itsiDrilldownLatestOffset}", ["900"]], "default_value": "900"}, "itsiDrilldownWebURL": {"name": "itsiDrilldownWebURL", "display_name": "ITSI Drilldown Website URL", "type": "notable_event_field", "input_type": "mapping_rule", "rule_type": "coalesce", "values": ["{itsiDrilldownURI}", "{itsiDrilldownWebURL}", ["https://splunk.com"]]}}, "association": {"entity_lookup_field": "", "service_ids": ""}, "cron_schedule": {"value": "*/5 * * * *", "type": "Basic"}, "status": "inactive", "title": "appdynamics_default", "throttling": {"dedup_grouping_fields": ["signature", "src", "subcomponent"], "dedup_notable_event": false, "throttling_earliest_time": "-59m", "throttling_latest_time": "now"}, "is_out_of_the_box": 1, "object_type": "data_integration", "identifying_name": "appdynamics_default", "created_time": 1753775971.2175276, "created_by": "nobody", "_user": "nobody", "_key": "appdynamics_default"}, {"data_source": "o11y", "ingestion_method": {"type": "INDEXED_DATA", "value": "index=main app=splunk_o11y_cloud", "time_range": {"earliest": "-24h", "latest": "now"}}, "mapped_fields": {"src": {"name": "src", "display_name": "Source", "type": "source_field", "input_type": "composition", "values": ["{src}"], "default_value": "o11y"}, "signature": {"name": "signature", "display_name": "Signature", "type": "notable_event_field", "input_type": "composition", "values": ["{signature}"], "default_value": "default_o11y_signature"}, "vendor_severity": {"name": "vendor_severity", "display_name": "Vendor Severity", "type": "notable_event_field", "input_type": "composition", "values": ["{vendor_severity}"], "default_value": "OK"}, "severity_id": {"name": "severity_id", "display_name": "Severity ID", "type": "notable_event_field", "input_type": "composition", "values": ["{severity_id}"], "default_value": "1"}, "title": {"name": "title", "display_name": "Title", "type": "notable_event_field", "input_type": "composition", "values": ["{signature}"], "default_value": "default_title"}, "owner": {"name": "owner", "display_name": "Owner", "type": "notable_event_field", "input_type": "composition", "values": ["unassigned"], "default_value": "unassigned"}, "status": {"name": "status", "display_name": "Status", "type": "notable_event_field", "input_type": "composition", "values": ["1"], "default_value": "1"}, "subcomponent": {"name": "subcomponent", "display_name": "Subcomponent", "type": "notable_event_field", "input_type": "mapping_rule", "rule_type": "coalesce", "values": ["{subcomponent}", ["-"]]}, "description": {"name": "description", "display_name": "Description", "type": "notable_event_field", "input_type": "composition", "values": ["{description}"]}, "app": {"name": "app", "display_name": "App", "type": "notable_event_field", "input_type": "composition", "values": ["{app}"]}, "itsiDrilldownSearch": {"name": "itsiDrilldownSearch", "display_name": "ITSI Drilldown Search", "type": "notable_event_field", "input_type": "composition", "values": ["{itsiDrilldownSearch}"]}, "itsiDrilldownEarliestOffset": {"name": "itsiDrilldownEarliestOffset", "display_name": "ITSI Drilldown earliest offset", "type": "notable_event_field", "input_type": "mapping_rule", "rule_type": "coalesce", "values": ["{itsiDrilldownEarliestOffset}", ["-900"]], "default_value": "-900"}, "itsiDrilldownLatestOffset": {"name": "itsiDrilldownLatestOffset", "display_name": "ITSI Drilldown latest offset", "type": "notable_event_field", "input_type": "mapping_rule", "rule_type": "coalesce", "values": ["{itsiDrilldownLatestOffset}", ["900"]], "default_value": "900"}, "itsiDrilldownWebURL": {"name": "itsiDrilldownWebURL", "display_name": "ITSI Drilldown Website URL", "type": "notable_event_field", "input_type": "mapping_rule", "rule_type": "coalesce", "values": ["{itsiDrilldownWebURL}", ["https://splunk.com"]]}}, "association": {"entity_lookup_field": "", "service_ids": ""}, "cron_schedule": {"value": "*/5 * * * *", "type": "Basic"}, "status": "inactive", "title": "olly_default", "throttling": {"dedup_grouping_fields": ["signature", "src", "subcomponent"], "dedup_notable_event": false, "throttling_earliest_time": "-59m", "throttling_latest_time": "now"}, "is_out_of_the_box": 1, "object_type": "data_integration", "identifying_name": "olly_default", "created_time": 1753775971.0493312, "created_by": "nobody", "_user": "nobody", "_key": "olly_default"}, {"data_source": "thousandeyes", "ingestion_method": {"type": "INDEXED_DATA", "value": "index=main sourcetype=thousandeyes_summary", "time_range": {"earliest": "-24h", "latest": "now"}}, "mapped_fields": {"src": {"name": "src", "display_name": "Source", "type": "source_field", "input_type": "composition", "values": ["{src}"], "default_value": "thousandeyes"}, "signature": {"name": "signature", "display_name": "Signature", "type": "notable_event_field", "input_type": "composition", "values": ["{signature}"], "default_value": "default_thousandeyes_signature"}, "vendor_severity": {"name": "vendor_severity", "display_name": "Vendor Severity", "type": "notable_event_field", "input_type": "composition", "values": ["{vendor_severity}"], "default_value": "OK"}, "severity_id": {"name": "severity_id", "display_name": "Severity ID", "type": "notable_event_field", "input_type": "composition", "values": ["{severity_id}"], "default_value": "1"}, "title": {"name": "title", "display_name": "Title", "type": "notable_event_field", "input_type": "composition", "values": ["{signature}"], "default_value": "default_title"}, "owner": {"name": "owner", "display_name": "Owner", "type": "notable_event_field", "input_type": "composition", "values": ["unassigned"], "default_value": "unassigned"}, "status": {"name": "status", "display_name": "Status", "type": "notable_event_field", "input_type": "composition", "values": ["1"], "default_value": "1"}, "subcomponent": {"name": "subcomponent", "display_name": "Subcomponent", "type": "notable_event_field", "input_type": "mapping_rule", "rule_type": "coalesce", "values": ["{subcomponent}", ["-"]]}, "description": {"name": "description", "display_name": "Description", "type": "notable_event_field", "input_type": "composition", "values": ["{description}"]}, "app": {"name": "app", "display_name": "App", "type": "notable_event_field", "input_type": "composition", "values": ["{app}"]}, "itsiDrilldownSearch": {"name": "itsiDrilldownSearch", "display_name": "ITSI Drilldown Search", "type": "notable_event_field", "input_type": "composition", "values": ["{itsiDrilldownSearch}"]}, "itsiDrilldownEarliestOffset": {"name": "itsiDrilldownEarliestOffset", "display_name": "ITSI Drilldown earliest offset", "type": "notable_event_field", "input_type": "mapping_rule", "rule_type": "coalesce", "values": ["{itsiDrilldownEarliestOffset}", ["-900"]], "default_value": "-900"}, "itsiDrilldownLatestOffset": {"name": "itsiDrilldownLatestOffset", "display_name": "ITSI Drilldown latest offset", "type": "notable_event_field", "input_type": "mapping_rule", "rule_type": "coalesce", "values": ["{itsiDrilldownLatestOffset}", ["900"]], "default_value": "900"}, "itsiDrilldownWebURL": {"name": "itsiDrilldownWebURL", "display_name": "ITSI Drilldown Website URL", "type": "notable_event_field", "input_type": "mapping_rule", "rule_type": "coalesce", "values": ["{itsiDrilldownURI}", "{itsiDrilldownWebURL}", ["https://splunk.com"]]}}, "association": {"entity_lookup_field": "", "service_ids": ""}, "cron_schedule": {"value": "*/5 * * * *", "type": "Basic"}, "status": "inactive", "title": "thousandeyes_default", "throttling": {"dedup_grouping_fields": ["signature", "src", "subcomponent"], "dedup_notable_event": false, "throttling_earliest_time": "-59m", "throttling_latest_time": "now"}, "is_out_of_the_box": 1, "object_type": "data_integration", "identifying_name": "thousandeyes_default", "created_time": 1753775971.4980989, "created_by": "nobody", "_user": "nobody", "_key": "thousandeyes_default"}]
+[
+  {
+    "_key": "appdynamics_default",
+    "_user": "nobody",
+    "association": {
+      "entity_lookup_field": "",
+      "service_ids": ""
+    },
+    "created_by": "nobody",
+    "created_time": 1753775971.2175276,
+    "cron_schedule": {
+      "type": "Basic",
+      "value": "*/5 * * * *"
+    },
+    "data_source": "appdynamics",
+    "identifying_name": "appdynamics_default",
+    "ingestion_method": {
+      "time_range": {
+        "earliest": "-24h",
+        "latest": "now"
+      },
+      "type": "INDEXED_DATA",
+      "value": "index=main sourcetype=appdynamics_summary"
+    },
+    "is_out_of_the_box": 1,
+    "mapped_fields": {
+      "app": {
+        "display_name": "App",
+        "input_type": "composition",
+        "name": "app",
+        "type": "notable_event_field",
+        "values": [
+          "{app}"
+        ]
+      },
+      "description": {
+        "display_name": "Description",
+        "input_type": "composition",
+        "name": "description",
+        "type": "notable_event_field",
+        "values": [
+          "{description}"
+        ]
+      },
+      "itsiDrilldownEarliestOffset": {
+        "default_value": "-900",
+        "display_name": "ITSI Drilldown earliest offset",
+        "input_type": "mapping_rule",
+        "name": "itsiDrilldownEarliestOffset",
+        "rule_type": "coalesce",
+        "type": "notable_event_field",
+        "values": [
+          "{itsiDrilldownEarliestOffset}",
+          [
+            "-900"
+          ]
+        ]
+      },
+      "itsiDrilldownLatestOffset": {
+        "default_value": "900",
+        "display_name": "ITSI Drilldown latest offset",
+        "input_type": "mapping_rule",
+        "name": "itsiDrilldownLatestOffset",
+        "rule_type": "coalesce",
+        "type": "notable_event_field",
+        "values": [
+          "{itsiDrilldownLatestOffset}",
+          [
+            "900"
+          ]
+        ]
+      },
+      "itsiDrilldownSearch": {
+        "display_name": "ITSI Drilldown Search",
+        "input_type": "composition",
+        "name": "itsiDrilldownSearch",
+        "type": "notable_event_field",
+        "values": [
+          "{itsiDrilldownSearch}"
+        ]
+      },
+      "itsiDrilldownWebURL": {
+        "display_name": "ITSI Drilldown Website URL",
+        "input_type": "mapping_rule",
+        "name": "itsiDrilldownWebURL",
+        "rule_type": "coalesce",
+        "type": "notable_event_field",
+        "values": [
+          "{itsiDrilldownURI}",
+          "{itsiDrilldownWebURL}",
+          [
+            "https://splunk.com"
+          ]
+        ]
+      },
+      "owner": {
+        "default_value": "unassigned",
+        "display_name": "Owner",
+        "input_type": "composition",
+        "name": "owner",
+        "type": "notable_event_field",
+        "values": [
+          "unassigned"
+        ]
+      },
+      "severity_id": {
+        "default_value": "1",
+        "display_name": "Severity ID",
+        "input_type": "composition",
+        "name": "severity_id",
+        "type": "notable_event_field",
+        "values": [
+          "{severity_id}"
+        ]
+      },
+      "signature": {
+        "default_value": "default_appdynamics_signature",
+        "display_name": "Signature",
+        "input_type": "composition",
+        "name": "signature",
+        "type": "notable_event_field",
+        "values": [
+          "{signature}"
+        ]
+      },
+      "src": {
+        "default_value": "appdynamics",
+        "display_name": "Source",
+        "input_type": "composition",
+        "name": "src",
+        "type": "source_field",
+        "values": [
+          "{src}"
+        ]
+      },
+      "status": {
+        "default_value": "1",
+        "display_name": "Status",
+        "input_type": "composition",
+        "name": "status",
+        "type": "notable_event_field",
+        "values": [
+          "1"
+        ]
+      },
+      "subcomponent": {
+        "display_name": "Subcomponent",
+        "input_type": "mapping_rule",
+        "name": "subcomponent",
+        "rule_type": "coalesce",
+        "type": "notable_event_field",
+        "values": [
+          "{subcomponent}",
+          [
+            "-"
+          ]
+        ]
+      },
+      "title": {
+        "default_value": "default_title",
+        "display_name": "Title",
+        "input_type": "composition",
+        "name": "title",
+        "type": "notable_event_field",
+        "values": [
+          "{signature}"
+        ]
+      },
+      "vendor_severity": {
+        "default_value": "OK",
+        "display_name": "Vendor Severity",
+        "input_type": "composition",
+        "name": "vendor_severity",
+        "type": "notable_event_field",
+        "values": [
+          "{vendor_severity}"
+        ]
+      }
+    },
+    "object_type": "data_integration",
+    "status": "inactive",
+    "throttling": {
+      "dedup_grouping_fields": [
+        "signature",
+        "src",
+        "subcomponent"
+      ],
+      "dedup_notable_event": false,
+      "throttling_earliest_time": "-59m",
+      "throttling_latest_time": "now"
+    },
+    "title": "appdynamics_default"
+  },
+  {
+    "_key": "olly_default",
+    "_user": "nobody",
+    "association": {
+      "entity_lookup_field": "",
+      "service_ids": ""
+    },
+    "created_by": "nobody",
+    "created_time": 1753775971.0493312,
+    "cron_schedule": {
+      "type": "Basic",
+      "value": "*/5 * * * *"
+    },
+    "data_source": "o11y",
+    "identifying_name": "olly_default",
+    "ingestion_method": {
+      "time_range": {
+        "earliest": "-24h",
+        "latest": "now"
+      },
+      "type": "INDEXED_DATA",
+      "value": "index=main app=splunk_o11y_cloud"
+    },
+    "is_out_of_the_box": 1,
+    "mapped_fields": {
+      "app": {
+        "display_name": "App",
+        "input_type": "composition",
+        "name": "app",
+        "type": "notable_event_field",
+        "values": [
+          "{app}"
+        ]
+      },
+      "description": {
+        "display_name": "Description",
+        "input_type": "composition",
+        "name": "description",
+        "type": "notable_event_field",
+        "values": [
+          "{description}"
+        ]
+      },
+      "itsiDrilldownEarliestOffset": {
+        "default_value": "-900",
+        "display_name": "ITSI Drilldown earliest offset",
+        "input_type": "mapping_rule",
+        "name": "itsiDrilldownEarliestOffset",
+        "rule_type": "coalesce",
+        "type": "notable_event_field",
+        "values": [
+          "{itsiDrilldownEarliestOffset}",
+          [
+            "-900"
+          ]
+        ]
+      },
+      "itsiDrilldownLatestOffset": {
+        "default_value": "900",
+        "display_name": "ITSI Drilldown latest offset",
+        "input_type": "mapping_rule",
+        "name": "itsiDrilldownLatestOffset",
+        "rule_type": "coalesce",
+        "type": "notable_event_field",
+        "values": [
+          "{itsiDrilldownLatestOffset}",
+          [
+            "900"
+          ]
+        ]
+      },
+      "itsiDrilldownSearch": {
+        "display_name": "ITSI Drilldown Search",
+        "input_type": "composition",
+        "name": "itsiDrilldownSearch",
+        "type": "notable_event_field",
+        "values": [
+          "{itsiDrilldownSearch}"
+        ]
+      },
+      "itsiDrilldownWebURL": {
+        "display_name": "ITSI Drilldown Website URL",
+        "input_type": "mapping_rule",
+        "name": "itsiDrilldownWebURL",
+        "rule_type": "coalesce",
+        "type": "notable_event_field",
+        "values": [
+          "{itsiDrilldownWebURL}",
+          [
+            "https://splunk.com"
+          ]
+        ]
+      },
+      "owner": {
+        "default_value": "unassigned",
+        "display_name": "Owner",
+        "input_type": "composition",
+        "name": "owner",
+        "type": "notable_event_field",
+        "values": [
+          "unassigned"
+        ]
+      },
+      "severity_id": {
+        "default_value": "1",
+        "display_name": "Severity ID",
+        "input_type": "composition",
+        "name": "severity_id",
+        "type": "notable_event_field",
+        "values": [
+          "{severity_id}"
+        ]
+      },
+      "signature": {
+        "default_value": "default_o11y_signature",
+        "display_name": "Signature",
+        "input_type": "composition",
+        "name": "signature",
+        "type": "notable_event_field",
+        "values": [
+          "{signature}"
+        ]
+      },
+      "src": {
+        "default_value": "o11y",
+        "display_name": "Source",
+        "input_type": "composition",
+        "name": "src",
+        "type": "source_field",
+        "values": [
+          "{src}"
+        ]
+      },
+      "status": {
+        "default_value": "1",
+        "display_name": "Status",
+        "input_type": "composition",
+        "name": "status",
+        "type": "notable_event_field",
+        "values": [
+          "1"
+        ]
+      },
+      "subcomponent": {
+        "display_name": "Subcomponent",
+        "input_type": "mapping_rule",
+        "name": "subcomponent",
+        "rule_type": "coalesce",
+        "type": "notable_event_field",
+        "values": [
+          "{subcomponent}",
+          [
+            "-"
+          ]
+        ]
+      },
+      "title": {
+        "default_value": "default_title",
+        "display_name": "Title",
+        "input_type": "composition",
+        "name": "title",
+        "type": "notable_event_field",
+        "values": [
+          "{signature}"
+        ]
+      },
+      "vendor_severity": {
+        "default_value": "OK",
+        "display_name": "Vendor Severity",
+        "input_type": "composition",
+        "name": "vendor_severity",
+        "type": "notable_event_field",
+        "values": [
+          "{vendor_severity}"
+        ]
+      }
+    },
+    "object_type": "data_integration",
+    "status": "inactive",
+    "throttling": {
+      "dedup_grouping_fields": [
+        "signature",
+        "src",
+        "subcomponent"
+      ],
+      "dedup_notable_event": false,
+      "throttling_earliest_time": "-59m",
+      "throttling_latest_time": "now"
+    },
+    "title": "olly_default"
+  },
+  {
+    "_key": "thousandeyes_default",
+    "_user": "nobody",
+    "association": {
+      "entity_lookup_field": "",
+      "service_ids": ""
+    },
+    "created_by": "nobody",
+    "created_time": 1753775971.4980989,
+    "cron_schedule": {
+      "type": "Basic",
+      "value": "*/5 * * * *"
+    },
+    "data_source": "thousandeyes",
+    "identifying_name": "thousandeyes_default",
+    "ingestion_method": {
+      "time_range": {
+        "earliest": "-24h",
+        "latest": "now"
+      },
+      "type": "INDEXED_DATA",
+      "value": "index=main sourcetype=thousandeyes_summary"
+    },
+    "is_out_of_the_box": 1,
+    "mapped_fields": {
+      "app": {
+        "display_name": "App",
+        "input_type": "composition",
+        "name": "app",
+        "type": "notable_event_field",
+        "values": [
+          "{app}"
+        ]
+      },
+      "description": {
+        "display_name": "Description",
+        "input_type": "composition",
+        "name": "description",
+        "type": "notable_event_field",
+        "values": [
+          "{description}"
+        ]
+      },
+      "itsiDrilldownEarliestOffset": {
+        "default_value": "-900",
+        "display_name": "ITSI Drilldown earliest offset",
+        "input_type": "mapping_rule",
+        "name": "itsiDrilldownEarliestOffset",
+        "rule_type": "coalesce",
+        "type": "notable_event_field",
+        "values": [
+          "{itsiDrilldownEarliestOffset}",
+          [
+            "-900"
+          ]
+        ]
+      },
+      "itsiDrilldownLatestOffset": {
+        "default_value": "900",
+        "display_name": "ITSI Drilldown latest offset",
+        "input_type": "mapping_rule",
+        "name": "itsiDrilldownLatestOffset",
+        "rule_type": "coalesce",
+        "type": "notable_event_field",
+        "values": [
+          "{itsiDrilldownLatestOffset}",
+          [
+            "900"
+          ]
+        ]
+      },
+      "itsiDrilldownSearch": {
+        "display_name": "ITSI Drilldown Search",
+        "input_type": "composition",
+        "name": "itsiDrilldownSearch",
+        "type": "notable_event_field",
+        "values": [
+          "{itsiDrilldownSearch}"
+        ]
+      },
+      "itsiDrilldownWebURL": {
+        "display_name": "ITSI Drilldown Website URL",
+        "input_type": "mapping_rule",
+        "name": "itsiDrilldownWebURL",
+        "rule_type": "coalesce",
+        "type": "notable_event_field",
+        "values": [
+          "{itsiDrilldownURI}",
+          "{itsiDrilldownWebURL}",
+          [
+            "https://splunk.com"
+          ]
+        ]
+      },
+      "owner": {
+        "default_value": "unassigned",
+        "display_name": "Owner",
+        "input_type": "composition",
+        "name": "owner",
+        "type": "notable_event_field",
+        "values": [
+          "unassigned"
+        ]
+      },
+      "severity_id": {
+        "default_value": "1",
+        "display_name": "Severity ID",
+        "input_type": "composition",
+        "name": "severity_id",
+        "type": "notable_event_field",
+        "values": [
+          "{severity_id}"
+        ]
+      },
+      "signature": {
+        "default_value": "default_thousandeyes_signature",
+        "display_name": "Signature",
+        "input_type": "composition",
+        "name": "signature",
+        "type": "notable_event_field",
+        "values": [
+          "{signature}"
+        ]
+      },
+      "src": {
+        "default_value": "thousandeyes",
+        "display_name": "Source",
+        "input_type": "composition",
+        "name": "src",
+        "type": "source_field",
+        "values": [
+          "{src}"
+        ]
+      },
+      "status": {
+        "default_value": "1",
+        "display_name": "Status",
+        "input_type": "composition",
+        "name": "status",
+        "type": "notable_event_field",
+        "values": [
+          "1"
+        ]
+      },
+      "subcomponent": {
+        "display_name": "Subcomponent",
+        "input_type": "mapping_rule",
+        "name": "subcomponent",
+        "rule_type": "coalesce",
+        "type": "notable_event_field",
+        "values": [
+          "{subcomponent}",
+          [
+            "-"
+          ]
+        ]
+      },
+      "title": {
+        "default_value": "default_title",
+        "display_name": "Title",
+        "input_type": "composition",
+        "name": "title",
+        "type": "notable_event_field",
+        "values": [
+          "{signature}"
+        ]
+      },
+      "vendor_severity": {
+        "default_value": "OK",
+        "display_name": "Vendor Severity",
+        "input_type": "composition",
+        "name": "vendor_severity",
+        "type": "notable_event_field",
+        "values": [
+          "{vendor_severity}"
+        ]
+      }
+    },
+    "object_type": "data_integration",
+    "status": "inactive",
+    "throttling": {
+      "dedup_grouping_fields": [
+        "signature",
+        "src",
+        "subcomponent"
+      ],
+      "dedup_notable_event": false,
+      "throttling_earliest_time": "-59m",
+      "throttling_latest_time": "now"
+    },
+    "title": "thousandeyes_default"
+  }
+]

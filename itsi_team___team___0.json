@@ -1,1 +1,43 @@
-[{"_immutable": "0", "acl": {"owner": "nobody", "read": ["*", "itoa_admin", "itoa_team_admin", "itoa_analyst", "itoa_user"], "write": ["itoa_admin"], "delete": ["itoa_admin"]}, "description": "By default, all ITSI objects are contained within the default Global team. If you don't need to restrict service visibility to specific teams in your organization, create all services in the Global team.", "title": "Global", "mod_source": "unknown", "object_type": "team", "mod_timestamp": "2025-07-29T07:59:38.405038+00:00", "_version": "4.20.1", "identifying_name": "global", "children": [], "parents": [], "_user": "nobody", "_key": "default_itsi_security_group", "permissions": {"user": "nobody", "group": {"read": true, "write": true, "delete": true}, "read": true, "write": true, "delete": true}}]
+[
+  {
+    "_immutable": "0",
+    "_key": "default_itsi_security_group",
+    "_user": "nobody",
+    "_version": "4.20.1",
+    "acl": {
+      "delete": [
+        "itoa_admin"
+      ],
+      "owner": "nobody",
+      "read": [
+        "*",
+        "itoa_admin",
+        "itoa_team_admin",
+        "itoa_analyst",
+        "itoa_user"
+      ],
+      "write": [
+        "itoa_admin"
+      ]
+    },
+    "children": [],
+    "description": "By default, all ITSI objects are contained within the default Global team. If you don't need to restrict service visibility to specific teams in your organization, create all services in the Global team.",
+    "identifying_name": "global",
+    "mod_source": "unknown",
+    "mod_timestamp": "2025-07-29T07:59:38.405038+00:00",
+    "object_type": "team",
+    "parents": [],
+    "permissions": {
+      "delete": true,
+      "group": {
+        "delete": true,
+        "read": true,
+        "write": true
+      },
+      "read": true,
+      "user": "nobody",
+      "write": true
+    },
+    "title": "Global"
+  }
+]

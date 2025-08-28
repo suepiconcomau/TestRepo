@@ -1,1 +1,65 @@
-[{"title": "", "description": "", "mod_time": "", "acl": {"can_change_perms": true, "can_share_app": true, "can_share_global": true, "can_share_user": true, "can_write": true, "modifiable": true, "owner": "admin", "perms": {"read": ["*"], "write": ["*"]}, "sharing": "app"}, "_owner": "nobody", "source_itsi_da": "itsi", "autoRefresh": 0, "collapsedNodes": "", "serviceWhitelist": "", "kpiWhitelist": [], "tagWhitelist": "", "isServiceFilterEnabled": false, "isKpiFilterEnabled": false, "isTagFilterEnabled": false, "serviceTilesSettings": {"isFilterEnabled": false, "numTiles": 50}, "kpiTilesSettings": {"isFilterEnabled": false, "numTiles": 50}, "earliest_time": "-12h", "latest_time": "now", "minSeverity": -1, "maxDepth": -2, "view": "standard", "viewType": "tile", "isDefault": true, "tileSize": "large", "showDisabledServices": false, "showServiceDependencies": false, "searchType": "aggregate", "serviceFilterString": "", "kpiFilterString": "", "tagFilterString": "", "sandboxId": "all", "mod_source": "unknown", "object_type": "home_view", "mod_timestamp": "2025-07-30T04:27:27.844922+00:00", "_version": "4.20.1", "identifying_name": "", "_user": "nobody", "_key": "admin"}]
+[
+  {
+    "_key": "admin",
+    "_owner": "nobody",
+    "_user": "nobody",
+    "_version": "4.20.1",
+    "acl": {
+      "can_change_perms": true,
+      "can_share_app": true,
+      "can_share_global": true,
+      "can_share_user": true,
+      "can_write": true,
+      "modifiable": true,
+      "owner": "admin",
+      "perms": {
+        "read": [
+          "*"
+        ],
+        "write": [
+          "*"
+        ]
+      },
+      "sharing": "app"
+    },
+    "autoRefresh": 0,
+    "collapsedNodes": "",
+    "description": "",
+    "earliest_time": "-12h",
+    "identifying_name": "",
+    "isDefault": true,
+    "isKpiFilterEnabled": false,
+    "isServiceFilterEnabled": false,
+    "isTagFilterEnabled": false,
+    "kpiFilterString": "",
+    "kpiTilesSettings": {
+      "isFilterEnabled": false,
+      "numTiles": 50
+    },
+    "kpiWhitelist": [],
+    "latest_time": "now",
+    "maxDepth": -2,
+    "minSeverity": -1,
+    "mod_source": "unknown",
+    "mod_time": "",
+    "mod_timestamp": "2025-07-30T04:27:27.844922+00:00",
+    "object_type": "home_view",
+    "sandboxId": "all",
+    "searchType": "aggregate",
+    "serviceFilterString": "",
+    "serviceTilesSettings": {
+      "isFilterEnabled": false,
+      "numTiles": 50
+    },
+    "serviceWhitelist": "",
+    "showDisabledServices": false,
+    "showServiceDependencies": false,
+    "source_itsi_da": "itsi",
+    "tagFilterString": "",
+    "tagWhitelist": "",
+    "tileSize": "large",
+    "title": "",
+    "view": "standard",
+    "viewType": "tile"
+  }
+]

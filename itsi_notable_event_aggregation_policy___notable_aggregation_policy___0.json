@@ -1,1 +1,1015 @@
-[{"title": "Entity Type Alerts", "description": "Applies to events for entities that match a custom or out-of-box Entity Type", "mod_time": 1754873411.194563, "acl": {"can_change_perms": true, "can_share_app": true, "can_share_global": true, "can_share_user": true, "can_write": true, "modifiable": true, "owner": "admin", "perms": {"read": ["*"], "write": ["*"]}, "sharing": "app"}, "_owner": "nobody", "source_itsi_da": "itsi", "ace_enabled": 0, "ace_factor_fields": [], "ace_factor_weights": [{"factor_name": "text", "factor_weight": 0.5}, {"factor_name": "attribute", "factor_weight": 0.5}], "ace_breaking_criteria": {"condition": "OR", "items": [{"type": "pause", "config": {"limit": "7200"}}]}, "ace_group_title": "%title%", "ace_group_description": "%description%", "ace_group_status": "%status%", "ace_group_assignee": "%owner%", "ace_group_severity": "%severity%", "ace_group_instruction": "%itsi_instruction%", "ace_group_dashboard": "", "ace_group_dashboard_context": "first", "ace_split_by_field": "", "ace_field_analysis_start_time": 0, "ace_field_analysis_end_time": 0, "aice_enabled": 0, "aice_fields_list": [], "aice_generated_fields": {}, "disabled": 1, "split_by_field": "entity_type,itsiSeverity", "priority": "", "is_default": 0, "service_topology_enabled": 1, "entity_factor_enabled": 1, "sub_group_limit": "", "filter_criteria": {"condition": "OR", "items": [{"type": "clause", "config": {"items": [{"type": "notable_event_field", "config": {"field": "entity_type", "operator": "=", "value": "*"}}, {"type": "notable_event_field", "config": {"field": "itsiAlert", "operator": "=", "value": "*"}}, {"type": "notable_event_field", "config": {"field": "itsiInstance", "operator": "=", "value": "*"}}, {"type": "notable_event_field", "config": {"field": "itsiSeverity", "operator": "=", "value": "*"}}, {"type": "notable_event_field", "config": {"field": "alert_source", "operator": "=", "value": "entity_type"}}], "condition": "AND"}}]}, "breaking_criteria": {"condition": "OR", "items": [{"type": "pause", "config": {"limit": "3600"}}, {"type": "clause", "config": {"items": [{"type": "notable_event_field", "config": {"field": "severity", "operator": "=", "value": "2"}}], "condition": "AND"}}]}, "rules": [{"_key": "entity_type_ootb_aggregation_policy_action_2", "runOnce": false, "repeatAction": false, "title": "Close episodes that are broken which have only 1 event.", "description": "If the episode is broken, and the episode has only 1 event,                                     then change the episode status to Closed.", "priority": 5, "repetition_criteria": {"duration": 300, "execute_on": "episode_acknowledge"}, "activation_criteria": {"condition": "AND", "items": [{"type": "breaking_criteria"}, {"type": "notable_event_count", "config": {"limit": "1", "operator": "=="}}]}, "actions": [{"condition": "AND", "items": [{"execution_criteria": {"execute_on": "GROUP"}, "config": {"field": "status", "value": "5"}, "type": "notable_event_change"}]}]}, {"_key": "entity_type_ootb_aggregation_policy_action_1", "runOnce": false, "repeatAction": false, "title": "Resolve episodes that are broken and have greater than or equal to 2 events", "description": "When the episode is broken, and the number of events in the episode is >= 2,                                     change the episode status to Resolved.", "priority": 5, "repetition_criteria": {"duration": 300, "execute_on": "episode_acknowledge"}, "activation_criteria": {"condition": "AND", "items": [{"type": "breaking_criteria"}, {"type": "notable_event_count", "config": {"limit": "2", "operator": ">="}}]}, "actions": [{"condition": "AND", "items": [{"execution_criteria": {"execute_on": "GROUP"}, "config": {"field": "status", "value": "4"}, "type": "notable_event_change"}]}]}], "group_title": "Entity Type Alerts: %entity_type%, Severity: %itsiSeverity%", "group_description": "Alerts for %entity_type% with Severity level %itsiSeverity%", "group_severity": "%last_severity%", "group_assignee": "%owner%", "group_status": "%status%", "group_instruction": "%last_instruction%", "group_custom_instruction": "", "group_dashboard": "", "group_dashboard_context": "first", "object_type": "notable_aggregation_policy", "create_time": 1753775970.8288703, "identifying_name": "entity type alerts", "_user": "nobody", "_key": "entity_type_ootb_aggregation_policy"}, {"title": "Default Policy", "description": "Applies to events that do not meet the criteria of any other active policy.", "mod_time": 1754875150.6233907, "acl": {"can_change_perms": true, "can_share_app": true, "can_share_global": true, "can_share_user": true, "can_write": true, "modifiable": true, "owner": "admin", "perms": {"read": ["*"], "write": ["*"]}, "sharing": "app"}, "_owner": "nobody", "source_itsi_da": "itsi", "ace_enabled": 0, "ace_factor_fields": [], "ace_factor_weights": [{"factor_name": "text", "factor_weight": 0.5}, {"factor_name": "attribute", "factor_weight": 0.5}], "ace_breaking_criteria": {"condition": "OR", "items": [{"type": "pause", "config": {"limit": "7200"}}]}, "ace_group_title": "%title%", "ace_group_description": "%description%", "ace_group_status": "%status%", "ace_group_assignee": "%owner%", "ace_group_severity": "%severity%", "ace_group_instruction": "%itsi_instruction%", "ace_group_dashboard": "", "ace_group_dashboard_context": "first", "ace_split_by_field": "", "ace_field_analysis_start_time": 0, "ace_field_analysis_end_time": 0, "aice_enabled": 0, "aice_fields_list": [], "aice_generated_fields": {}, "disabled": 0, "split_by_field": "source", "priority": 5, "is_default": 1, "service_topology_enabled": 1, "entity_factor_enabled": 1, "sub_group_limit": "", "filter_criteria": {"condition": "OR", "items": []}, "breaking_criteria": {"condition": "OR", "items": [{"type": "pause", "config": {"limit": "7200"}}]}, "rules": [{"_key": "2572248212eafd2caae59b94", "runOnce": true, "repeatAction": false, "title": "", "description": "", "priority": 5, "repetition_criteria": {"duration": 300, "execute_on": "episode_acknowledge"}, "activation_criteria": {"condition": "AND", "items": [{"type": "notable_event_count", "config": {"limit": 1, "operator": ">="}}]}, "actions": [{"condition": "AND", "items": [{"execution_criteria": {"execute_on": "GROUP"}, "config": {"name": "snow_incident", "params": "{\"action.snow_incident.param._cam\":\"\",\"action.snow_incident.param._cam_workers\":\"\",\"action.snow_incident.param.account\":\"snow_devbox\",\"action.snow_incident.param.assignment_group\":\"\",\"action.snow_incident.param.category\":\"\",\"action.snow_incident.param.configuration_item\":\"\",\"action.snow_incident.param.contact_type\":\"\",\"action.snow_incident.param.correlation_id\":\"\",\"action.snow_incident.param.custom_fields\":\"\",\"action.snow_incident.param.impact\":\"\",\"action.snow_incident.param.priority\":\"\",\"action.snow_incident.param.scripted_endpoint\":\"/api/now/table/incident\",\"action.snow_incident.param.short_description\":\"Splunk Event ID: $result.itsi_group_id$; Splunk Event Title : $result.title$\",\"action.snow_incident.param.splunk_url\":\"\",\"action.snow_incident.param.state\":\"\",\"action.snow_incident.param.subcategory\":\"\",\"action.snow_incident.param.urgency\":\"\"}"}, "type": "notable_event_execute_action"}]}]}], "group_title": "%title%", "group_description": "%description%", "group_severity": "%severity%", "group_assignee": "%owner%", "group_status": "%status%", "group_instruction": "%itsi_instruction%", "group_custom_instruction": "", "group_dashboard": "", "group_dashboard_context": "first", "object_type": "notable_aggregation_policy", "create_time": 1753775970.3306491, "identifying_name": "default policy", "isFirstTimeSaveDone": true, "_user": "nobody", "_key": "itsi_default_policy"}, {"group_title": "%title%", "group_description": "%description%", "group_status": "%status%", "group_assignee": "%owner%", "disabled": 1, "is_default": 0, "object_type": "notable_aggregation_policy", "title": "Default SNMP Policy", "description": "Aggregation policy for SNMP traps", "split_by_field": "node,description", "priority": "", "group_severity": "%severity%", "filter_criteria": {"items": [{"type": "clause", "config": {"items": [{"type": "notable_event_field", "config": {"operator": "=", "field": "node", "value": "*"}}, {"type": "notable_event_field", "config": {"operator": "=", "field": "description", "value": "*"}}], "condition": "AND"}}], "condition": "OR"}, "breaking_criteria": {"items": [{"type": "clause", "config": {"items": [{"type": "notable_event_field", "config": {"operator": "=", "field": "severity", "value": "2"}}], "condition": "AND"}}], "condition": "OR"}, "rules": [], "create_time": 1753775970.6119545, "mod_time": 1753775970.6119545, "identifying_name": "default snmp policy", "_user": "nobody", "_key": "itsi_default_snmp_policy"}, {"title": "KPI Alerting Policy", "description": "Aggregation policy for KPI state-change alerts", "mod_time": 1754873335.1299517, "acl": {"can_change_perms": true, "can_share_app": true, "can_share_global": true, "can_share_user": true, "can_write": true, "modifiable": true, "owner": "admin", "perms": {"read": ["*"], "write": ["*"]}, "sharing": "app"}, "_owner": "nobody", "source_itsi_da": "itsi", "ace_enabled": 0, "ace_factor_fields": [], "ace_factor_weights": [{"factor_name": "text", "factor_weight": 0.5}, {"factor_name": "attribute", "factor_weight": 0.5}], "ace_breaking_criteria": {"condition": "OR", "items": [{"type": "pause", "config": {"limit": "7200"}}]}, "ace_group_title": "%title%", "ace_group_description": "%description%", "ace_group_status": "%status%", "ace_group_assignee": "%owner%", "ace_group_severity": "%severity%", "ace_group_instruction": "%itsi_instruction%", "ace_group_dashboard": "", "ace_group_dashboard_context": "first", "ace_split_by_field": "", "ace_field_analysis_start_time": 0, "ace_field_analysis_end_time": 0, "aice_enabled": 0, "aice_fields_list": [], "aice_generated_fields": {}, "disabled": 1, "split_by_field": "service_ids", "priority": "", "is_default": 0, "service_topology_enabled": 1, "entity_factor_enabled": 1, "sub_group_limit": "", "filter_criteria": {"condition": "OR", "items": [{"type": "clause", "config": {"items": [{"type": "notable_event_field", "config": {"field": "kpiid", "operator": "=", "value": "*"}}, {"type": "notable_event_field", "config": {"field": "alert_type", "operator": "=", "value": "KPI alert"}}], "condition": "AND"}}]}, "breaking_criteria": {"condition": "OR", "items": [{"type": "pause", "config": {"limit": "3600"}}]}, "rules": [], "group_title": "KPI Alerts from Service: %service_title%", "group_description": "Grouped alerts from service %service_title%; most recent alert from KPI %kpi_title%", "group_severity": "%last_severity%", "group_assignee": "%last_owner%", "group_status": "%last_status%", "group_instruction": "%last_instruction%", "group_custom_instruction": "", "group_dashboard": "", "group_dashboard_context": "first", "identifying_name": "kpi alerting policy", "object_type": "notable_aggregation_policy", "create_time": 1753775970.7336323, "_user": "nobody", "_key": "kpi_alerting_policy"}, {"title": "KPI drift policy", "description": "Aggregation policy for KPI drift alerts", "mod_time": 1754873333.6872694, "acl": {"can_change_perms": true, "can_share_app": true, "can_share_global": true, "can_share_user": true, "can_write": true, "modifiable": true, "owner": "admin", "perms": {"read": ["*"], "write": ["*"]}, "sharing": "app"}, "_owner": "nobody", "source_itsi_da": "itsi", "ace_enabled": 0, "ace_factor_fields": [], "ace_factor_weights": [{"factor_name": "text", "factor_weight": 0.5}, {"factor_name": "attribute", "factor_weight": 0.5}], "ace_breaking_criteria": {"condition": "OR", "items": [{"type": "pause", "config": {"limit": "7200"}}]}, "ace_group_title": "%title%", "ace_group_description": "%description%", "ace_group_status": "%status%", "ace_group_assignee": "%owner%", "ace_group_severity": "%severity%", "ace_group_instruction": "%itsi_instruction%", "ace_group_dashboard": "", "ace_group_dashboard_context": "first", "ace_split_by_field": "", "ace_field_analysis_start_time": 0, "ace_field_analysis_end_time": 0, "aice_enabled": 0, "aice_fields_list": [], "aice_generated_fields": {}, "disabled": 1, "split_by_field": "kpiid,drift_type,start_time", "priority": "", "is_default": 0, "service_topology_enabled": 1, "entity_factor_enabled": 1, "sub_group_limit": "", "filter_criteria": {"condition": "OR", "items": [{"type": "clause", "config": {"items": [{"type": "notable_event_field", "config": {"field": "kpiid", "operator": "=", "value": "*"}}, {"type": "notable_event_field", "config": {"field": "source", "operator": "=", "value": "DriftDetection"}}], "condition": "AND"}}]}, "breaking_criteria": {"condition": "OR", "items": [{"type": "clause", "config": {"items": [{"type": "notable_event_field", "config": {"field": "alert_type", "operator": "=", "value": "clearing"}}], "condition": "AND"}}, {"type": "duration", "config": {"limit": 7776000}}]}, "rules": [{"_key": "kpi_drift_policy_rule_1", "runOnce": false, "repeatAction": false, "title": "", "description": "", "priority": 5, "repetition_criteria": {"duration": 300, "execute_on": "episode_acknowledge"}, "activation_criteria": {"condition": "AND", "items": [{"type": "breaking_criteria"}]}, "actions": [{"condition": "AND", "items": [{"execution_criteria": {"execute_on": "GROUP"}, "config": {"field": "status", "value": "5"}, "type": "notable_event_change"}]}]}], "group_title": "%last_title%", "group_description": "%last_description%", "group_severity": "%last_severity%", "group_assignee": "%owner%", "group_status": "%status%", "group_instruction": "%itsi_instruction%", "group_custom_instruction": "", "group_dashboard": "", "group_dashboard_context": "first", "run_time_based_actions_once": 0, "object_type": "notable_aggregation_policy", "identifying_name": "kpi drift policy", "create_time": 1753775970.9171662, "_user": "nobody", "_key": "kpi_drift_policy"}, {"title": "Normalized Policy (Splunk App for Infrastructure)", "description": "Applies to events that contain ITSI normalized fields.", "mod_time": 1754873334.134878, "acl": {"can_change_perms": true, "can_share_app": true, "can_share_global": true, "can_share_user": true, "can_write": true, "modifiable": true, "owner": "admin", "perms": {"read": ["*"], "write": ["*"]}, "sharing": "app"}, "_owner": "nobody", "source_itsi_da": "itsi", "ace_enabled": 0, "ace_factor_fields": [], "ace_factor_weights": [{"factor_name": "text", "factor_weight": 0.5}, {"factor_name": "attribute", "factor_weight": 0.5}], "ace_breaking_criteria": {"condition": "OR", "items": [{"type": "pause", "config": {"limit": "7200"}}]}, "ace_group_title": "%title%", "ace_group_description": "%description%", "ace_group_status": "%status%", "ace_group_assignee": "%owner%", "ace_group_severity": "%severity%", "ace_group_instruction": "%itsi_instruction%", "ace_group_dashboard": "", "ace_group_dashboard_context": "first", "ace_split_by_field": "", "ace_field_analysis_start_time": 0, "ace_field_analysis_end_time": 0, "aice_enabled": 0, "aice_fields_list": [], "aice_generated_fields": {}, "disabled": 1, "split_by_field": "itsiAlert,itsiInstance", "priority": "", "is_default": 0, "service_topology_enabled": 1, "entity_factor_enabled": 1, "sub_group_limit": "", "filter_criteria": {"condition": "OR", "items": [{"type": "clause", "config": {"items": [{"type": "notable_event_field", "config": {"field": "itsiAlert", "operator": "=", "value": "*"}}, {"type": "notable_event_field", "config": {"field": "itsiInstance", "operator": "=", "value": "*"}}, {"type": "notable_event_field", "config": {"field": "itsiSubInstance", "operator": "=", "value": "*"}}, {"type": "notable_event_field", "config": {"field": "itsiSeverity", "operator": "=", "value": "*"}}], "condition": "AND"}}]}, "breaking_criteria": {"condition": "OR", "items": [{"type": "pause", "config": {"limit": "3600"}}, {"type": "clause", "config": {"items": [{"type": "notable_event_field", "config": {"field": "severity", "operator": "=", "value": "2"}}], "condition": "AND"}}]}, "rules": [{"_key": "normalized_aggregation_policy_action_2", "runOnce": false, "repeatAction": false, "title": "", "description": "", "priority": 5, "repetition_criteria": {"duration": 300, "execute_on": "episode_acknowledge"}, "activation_criteria": {"condition": "AND", "items": [{"type": "breaking_criteria"}, {"type": "notable_event_count", "config": {"limit": "1", "operator": "=="}}]}, "actions": [{"condition": "AND", "items": [{"execution_criteria": {"execute_on": "GROUP"}, "config": {"field": "status", "value": "5"}, "type": "notable_event_change"}]}]}, {"_key": "normalized_aggregation_policy_action_1", "runOnce": false, "repeatAction": false, "title": "", "description": "", "priority": 5, "repetition_criteria": {"duration": 300, "execute_on": "episode_acknowledge"}, "activation_criteria": {"condition": "AND", "items": [{"type": "breaking_criteria"}, {"type": "notable_event_count", "config": {"limit": "2", "operator": ">="}}]}, "actions": [{"condition": "AND", "items": [{"execution_criteria": {"execute_on": "GROUP"}, "config": {"field": "status", "value": "4"}, "type": "notable_event_change"}]}]}], "group_title": "Normalized Alert for %itsiInstance% (%itsiSubInstance%) : %itsiAlert%", "group_description": "%last_description%", "group_severity": "%last_severity%", "group_assignee": "%owner%", "group_status": "%status%", "group_instruction": "%last_instruction%", "group_custom_instruction": "", "group_dashboard": "", "group_dashboard_context": "first", "object_type": "notable_aggregation_policy", "create_time": 1753775970.5018828, "identifying_name": "normalized policy (splunk app for infrastructure)", "_user": "nobody", "_key": "normalized_aggregation_policy"}]
+[
+  {
+    "_key": "entity_type_ootb_aggregation_policy",
+    "_owner": "nobody",
+    "_user": "nobody",
+    "ace_breaking_criteria": {
+      "condition": "OR",
+      "items": [
+        {
+          "config": {
+            "limit": "7200"
+          },
+          "type": "pause"
+        }
+      ]
+    },
+    "ace_enabled": 0,
+    "ace_factor_fields": [],
+    "ace_factor_weights": [
+      {
+        "factor_name": "text",
+        "factor_weight": 0.5
+      },
+      {
+        "factor_name": "attribute",
+        "factor_weight": 0.5
+      }
+    ],
+    "ace_field_analysis_end_time": 0,
+    "ace_field_analysis_start_time": 0,
+    "ace_group_assignee": "%owner%",
+    "ace_group_dashboard": "",
+    "ace_group_dashboard_context": "first",
+    "ace_group_description": "%description%",
+    "ace_group_instruction": "%itsi_instruction%",
+    "ace_group_severity": "%severity%",
+    "ace_group_status": "%status%",
+    "ace_group_title": "%title%",
+    "ace_split_by_field": "",
+    "acl": {
+      "can_change_perms": true,
+      "can_share_app": true,
+      "can_share_global": true,
+      "can_share_user": true,
+      "can_write": true,
+      "modifiable": true,
+      "owner": "admin",
+      "perms": {
+        "read": [
+          "*"
+        ],
+        "write": [
+          "*"
+        ]
+      },
+      "sharing": "app"
+    },
+    "aice_enabled": 0,
+    "aice_fields_list": [],
+    "aice_generated_fields": {},
+    "breaking_criteria": {
+      "condition": "OR",
+      "items": [
+        {
+          "config": {
+            "limit": "3600"
+          },
+          "type": "pause"
+        },
+        {
+          "config": {
+            "condition": "AND",
+            "items": [
+              {
+                "config": {
+                  "field": "severity",
+                  "operator": "=",
+                  "value": "2"
+                },
+                "type": "notable_event_field"
+              }
+            ]
+          },
+          "type": "clause"
+        }
+      ]
+    },
+    "create_time": 1753775970.8288703,
+    "description": "Applies to events for entities that match a custom or out-of-box Entity Type",
+    "disabled": 1,
+    "entity_factor_enabled": 1,
+    "filter_criteria": {
+      "condition": "OR",
+      "items": [
+        {
+          "config": {
+            "condition": "AND",
+            "items": [
+              {
+                "config": {
+                  "field": "entity_type",
+                  "operator": "=",
+                  "value": "*"
+                },
+                "type": "notable_event_field"
+              },
+              {
+                "config": {
+                  "field": "itsiAlert",
+                  "operator": "=",
+                  "value": "*"
+                },
+                "type": "notable_event_field"
+              },
+              {
+                "config": {
+                  "field": "itsiInstance",
+                  "operator": "=",
+                  "value": "*"
+                },
+                "type": "notable_event_field"
+              },
+              {
+                "config": {
+                  "field": "itsiSeverity",
+                  "operator": "=",
+                  "value": "*"
+                },
+                "type": "notable_event_field"
+              },
+              {
+                "config": {
+                  "field": "alert_source",
+                  "operator": "=",
+                  "value": "entity_type"
+                },
+                "type": "notable_event_field"
+              }
+            ]
+          },
+          "type": "clause"
+        }
+      ]
+    },
+    "group_assignee": "%owner%",
+    "group_custom_instruction": "",
+    "group_dashboard": "",
+    "group_dashboard_context": "first",
+    "group_description": "Alerts for %entity_type% with Severity level %itsiSeverity%",
+    "group_instruction": "%last_instruction%",
+    "group_severity": "%last_severity%",
+    "group_status": "%status%",
+    "group_title": "Entity Type Alerts: %entity_type%, Severity: %itsiSeverity%",
+    "identifying_name": "entity type alerts",
+    "is_default": 0,
+    "mod_time": 1754873411.194563,
+    "object_type": "notable_aggregation_policy",
+    "priority": "",
+    "rules": [
+      {
+        "_key": "entity_type_ootb_aggregation_policy_action_2",
+        "actions": [
+          {
+            "condition": "AND",
+            "items": [
+              {
+                "config": {
+                  "field": "status",
+                  "value": "5"
+                },
+                "execution_criteria": {
+                  "execute_on": "GROUP"
+                },
+                "type": "notable_event_change"
+              }
+            ]
+          }
+        ],
+        "activation_criteria": {
+          "condition": "AND",
+          "items": [
+            {
+              "type": "breaking_criteria"
+            },
+            {
+              "config": {
+                "limit": "1",
+                "operator": "=="
+              },
+              "type": "notable_event_count"
+            }
+          ]
+        },
+        "description": "If the episode is broken, and the episode has only 1 event,                                     then change the episode status to Closed.",
+        "priority": 5,
+        "repeatAction": false,
+        "repetition_criteria": {
+          "duration": 300,
+          "execute_on": "episode_acknowledge"
+        },
+        "runOnce": false,
+        "title": "Close episodes that are broken which have only 1 event."
+      },
+      {
+        "_key": "entity_type_ootb_aggregation_policy_action_1",
+        "actions": [
+          {
+            "condition": "AND",
+            "items": [
+              {
+                "config": {
+                  "field": "status",
+                  "value": "4"
+                },
+                "execution_criteria": {
+                  "execute_on": "GROUP"
+                },
+                "type": "notable_event_change"
+              }
+            ]
+          }
+        ],
+        "activation_criteria": {
+          "condition": "AND",
+          "items": [
+            {
+              "type": "breaking_criteria"
+            },
+            {
+              "config": {
+                "limit": "2",
+                "operator": ">="
+              },
+              "type": "notable_event_count"
+            }
+          ]
+        },
+        "description": "When the episode is broken, and the number of events in the episode is >= 2,                                     change the episode status to Resolved.",
+        "priority": 5,
+        "repeatAction": false,
+        "repetition_criteria": {
+          "duration": 300,
+          "execute_on": "episode_acknowledge"
+        },
+        "runOnce": false,
+        "title": "Resolve episodes that are broken and have greater than or equal to 2 events"
+      }
+    ],
+    "service_topology_enabled": 1,
+    "source_itsi_da": "itsi",
+    "split_by_field": "entity_type,itsiSeverity",
+    "sub_group_limit": "",
+    "title": "Entity Type Alerts"
+  },
+  {
+    "_key": "itsi_default_policy",
+    "_owner": "nobody",
+    "_user": "nobody",
+    "ace_breaking_criteria": {
+      "condition": "OR",
+      "items": [
+        {
+          "config": {
+            "limit": "7200"
+          },
+          "type": "pause"
+        }
+      ]
+    },
+    "ace_enabled": 0,
+    "ace_factor_fields": [],
+    "ace_factor_weights": [
+      {
+        "factor_name": "text",
+        "factor_weight": 0.5
+      },
+      {
+        "factor_name": "attribute",
+        "factor_weight": 0.5
+      }
+    ],
+    "ace_field_analysis_end_time": 0,
+    "ace_field_analysis_start_time": 0,
+    "ace_group_assignee": "%owner%",
+    "ace_group_dashboard": "",
+    "ace_group_dashboard_context": "first",
+    "ace_group_description": "%description%",
+    "ace_group_instruction": "%itsi_instruction%",
+    "ace_group_severity": "%severity%",
+    "ace_group_status": "%status%",
+    "ace_group_title": "%title%",
+    "ace_split_by_field": "",
+    "acl": {
+      "can_change_perms": true,
+      "can_share_app": true,
+      "can_share_global": true,
+      "can_share_user": true,
+      "can_write": true,
+      "modifiable": true,
+      "owner": "admin",
+      "perms": {
+        "read": [
+          "*"
+        ],
+        "write": [
+          "*"
+        ]
+      },
+      "sharing": "app"
+    },
+    "aice_enabled": 0,
+    "aice_fields_list": [],
+    "aice_generated_fields": {},
+    "breaking_criteria": {
+      "condition": "OR",
+      "items": [
+        {
+          "config": {
+            "limit": "7200"
+          },
+          "type": "pause"
+        }
+      ]
+    },
+    "create_time": 1753775970.3306491,
+    "description": "Applies to events that do not meet the criteria of any other active policy.",
+    "disabled": 0,
+    "entity_factor_enabled": 1,
+    "filter_criteria": {
+      "condition": "OR",
+      "items": []
+    },
+    "group_assignee": "%owner%",
+    "group_custom_instruction": "",
+    "group_dashboard": "",
+    "group_dashboard_context": "first",
+    "group_description": "%description%",
+    "group_instruction": "%itsi_instruction%",
+    "group_severity": "%severity%",
+    "group_status": "%status%",
+    "group_title": "%title%",
+    "identifying_name": "default policy",
+    "isFirstTimeSaveDone": true,
+    "is_default": 1,
+    "mod_time": 1754875150.6233907,
+    "object_type": "notable_aggregation_policy",
+    "priority": 5,
+    "rules": [
+      {
+        "_key": "2572248212eafd2caae59b94",
+        "actions": [
+          {
+            "condition": "AND",
+            "items": [
+              {
+                "config": {
+                  "name": "snow_incident",
+                  "params": "{\"action.snow_incident.param._cam\":\"\",\"action.snow_incident.param._cam_workers\":\"\",\"action.snow_incident.param.account\":\"snow_devbox\",\"action.snow_incident.param.assignment_group\":\"\",\"action.snow_incident.param.category\":\"\",\"action.snow_incident.param.configuration_item\":\"\",\"action.snow_incident.param.contact_type\":\"\",\"action.snow_incident.param.correlation_id\":\"\",\"action.snow_incident.param.custom_fields\":\"\",\"action.snow_incident.param.impact\":\"\",\"action.snow_incident.param.priority\":\"\",\"action.snow_incident.param.scripted_endpoint\":\"/api/now/table/incident\",\"action.snow_incident.param.short_description\":\"Splunk Event ID: $result.itsi_group_id$; Splunk Event Title : $result.title$\",\"action.snow_incident.param.splunk_url\":\"\",\"action.snow_incident.param.state\":\"\",\"action.snow_incident.param.subcategory\":\"\",\"action.snow_incident.param.urgency\":\"\"}"
+                },
+                "execution_criteria": {
+                  "execute_on": "GROUP"
+                },
+                "type": "notable_event_execute_action"
+              }
+            ]
+          }
+        ],
+        "activation_criteria": {
+          "condition": "AND",
+          "items": [
+            {
+              "config": {
+                "limit": 1,
+                "operator": ">="
+              },
+              "type": "notable_event_count"
+            }
+          ]
+        },
+        "description": "",
+        "priority": 5,
+        "repeatAction": false,
+        "repetition_criteria": {
+          "duration": 300,
+          "execute_on": "episode_acknowledge"
+        },
+        "runOnce": true,
+        "title": ""
+      }
+    ],
+    "service_topology_enabled": 1,
+    "source_itsi_da": "itsi",
+    "split_by_field": "source",
+    "sub_group_limit": "",
+    "title": "Default Policy"
+  },
+  {
+    "_key": "itsi_default_snmp_policy",
+    "_user": "nobody",
+    "breaking_criteria": {
+      "condition": "OR",
+      "items": [
+        {
+          "config": {
+            "condition": "AND",
+            "items": [
+              {
+                "config": {
+                  "field": "severity",
+                  "operator": "=",
+                  "value": "2"
+                },
+                "type": "notable_event_field"
+              }
+            ]
+          },
+          "type": "clause"
+        }
+      ]
+    },
+    "create_time": 1753775970.6119545,
+    "description": "Aggregation policy for SNMP traps",
+    "disabled": 1,
+    "filter_criteria": {
+      "condition": "OR",
+      "items": [
+        {
+          "config": {
+            "condition": "AND",
+            "items": [
+              {
+                "config": {
+                  "field": "node",
+                  "operator": "=",
+                  "value": "*"
+                },
+                "type": "notable_event_field"
+              },
+              {
+                "config": {
+                  "field": "description",
+                  "operator": "=",
+                  "value": "*"
+                },
+                "type": "notable_event_field"
+              }
+            ]
+          },
+          "type": "clause"
+        }
+      ]
+    },
+    "group_assignee": "%owner%",
+    "group_description": "%description%",
+    "group_severity": "%severity%",
+    "group_status": "%status%",
+    "group_title": "%title%",
+    "identifying_name": "default snmp policy",
+    "is_default": 0,
+    "mod_time": 1753775970.6119545,
+    "object_type": "notable_aggregation_policy",
+    "priority": "",
+    "rules": [],
+    "split_by_field": "node,description",
+    "title": "Default SNMP Policy"
+  },
+  {
+    "_key": "kpi_alerting_policy",
+    "_owner": "nobody",
+    "_user": "nobody",
+    "ace_breaking_criteria": {
+      "condition": "OR",
+      "items": [
+        {
+          "config": {
+            "limit": "7200"
+          },
+          "type": "pause"
+        }
+      ]
+    },
+    "ace_enabled": 0,
+    "ace_factor_fields": [],
+    "ace_factor_weights": [
+      {
+        "factor_name": "text",
+        "factor_weight": 0.5
+      },
+      {
+        "factor_name": "attribute",
+        "factor_weight": 0.5
+      }
+    ],
+    "ace_field_analysis_end_time": 0,
+    "ace_field_analysis_start_time": 0,
+    "ace_group_assignee": "%owner%",
+    "ace_group_dashboard": "",
+    "ace_group_dashboard_context": "first",
+    "ace_group_description": "%description%",
+    "ace_group_instruction": "%itsi_instruction%",
+    "ace_group_severity": "%severity%",
+    "ace_group_status": "%status%",
+    "ace_group_title": "%title%",
+    "ace_split_by_field": "",
+    "acl": {
+      "can_change_perms": true,
+      "can_share_app": true,
+      "can_share_global": true,
+      "can_share_user": true,
+      "can_write": true,
+      "modifiable": true,
+      "owner": "admin",
+      "perms": {
+        "read": [
+          "*"
+        ],
+        "write": [
+          "*"
+        ]
+      },
+      "sharing": "app"
+    },
+    "aice_enabled": 0,
+    "aice_fields_list": [],
+    "aice_generated_fields": {},
+    "breaking_criteria": {
+      "condition": "OR",
+      "items": [
+        {
+          "config": {
+            "limit": "3600"
+          },
+          "type": "pause"
+        }
+      ]
+    },
+    "create_time": 1753775970.7336323,
+    "description": "Aggregation policy for KPI state-change alerts",
+    "disabled": 1,
+    "entity_factor_enabled": 1,
+    "filter_criteria": {
+      "condition": "OR",
+      "items": [
+        {
+          "config": {
+            "condition": "AND",
+            "items": [
+              {
+                "config": {
+                  "field": "kpiid",
+                  "operator": "=",
+                  "value": "*"
+                },
+                "type": "notable_event_field"
+              },
+              {
+                "config": {
+                  "field": "alert_type",
+                  "operator": "=",
+                  "value": "KPI alert"
+                },
+                "type": "notable_event_field"
+              }
+            ]
+          },
+          "type": "clause"
+        }
+      ]
+    },
+    "group_assignee": "%last_owner%",
+    "group_custom_instruction": "",
+    "group_dashboard": "",
+    "group_dashboard_context": "first",
+    "group_description": "Grouped alerts from service %service_title%; most recent alert from KPI %kpi_title%",
+    "group_instruction": "%last_instruction%",
+    "group_severity": "%last_severity%",
+    "group_status": "%last_status%",
+    "group_title": "KPI Alerts from Service: %service_title%",
+    "identifying_name": "kpi alerting policy",
+    "is_default": 0,
+    "mod_time": 1754873335.1299517,
+    "object_type": "notable_aggregation_policy",
+    "priority": "",
+    "rules": [],
+    "service_topology_enabled": 1,
+    "source_itsi_da": "itsi",
+    "split_by_field": "service_ids",
+    "sub_group_limit": "",
+    "title": "KPI Alerting Policy"
+  },
+  {
+    "_key": "kpi_drift_policy",
+    "_owner": "nobody",
+    "_user": "nobody",
+    "ace_breaking_criteria": {
+      "condition": "OR",
+      "items": [
+        {
+          "config": {
+            "limit": "7200"
+          },
+          "type": "pause"
+        }
+      ]
+    },
+    "ace_enabled": 0,
+    "ace_factor_fields": [],
+    "ace_factor_weights": [
+      {
+        "factor_name": "text",
+        "factor_weight": 0.5
+      },
+      {
+        "factor_name": "attribute",
+        "factor_weight": 0.5
+      }
+    ],
+    "ace_field_analysis_end_time": 0,
+    "ace_field_analysis_start_time": 0,
+    "ace_group_assignee": "%owner%",
+    "ace_group_dashboard": "",
+    "ace_group_dashboard_context": "first",
+    "ace_group_description": "%description%",
+    "ace_group_instruction": "%itsi_instruction%",
+    "ace_group_severity": "%severity%",
+    "ace_group_status": "%status%",
+    "ace_group_title": "%title%",
+    "ace_split_by_field": "",
+    "acl": {
+      "can_change_perms": true,
+      "can_share_app": true,
+      "can_share_global": true,
+      "can_share_user": true,
+      "can_write": true,
+      "modifiable": true,
+      "owner": "admin",
+      "perms": {
+        "read": [
+          "*"
+        ],
+        "write": [
+          "*"
+        ]
+      },
+      "sharing": "app"
+    },
+    "aice_enabled": 0,
+    "aice_fields_list": [],
+    "aice_generated_fields": {},
+    "breaking_criteria": {
+      "condition": "OR",
+      "items": [
+        {
+          "config": {
+            "condition": "AND",
+            "items": [
+              {
+                "config": {
+                  "field": "alert_type",
+                  "operator": "=",
+                  "value": "clearing"
+                },
+                "type": "notable_event_field"
+              }
+            ]
+          },
+          "type": "clause"
+        },
+        {
+          "config": {
+            "limit": 7776000
+          },
+          "type": "duration"
+        }
+      ]
+    },
+    "create_time": 1753775970.9171662,
+    "description": "Aggregation policy for KPI drift alerts",
+    "disabled": 1,
+    "entity_factor_enabled": 1,
+    "filter_criteria": {
+      "condition": "OR",
+      "items": [
+        {
+          "config": {
+            "condition": "AND",
+            "items": [
+              {
+                "config": {
+                  "field": "kpiid",
+                  "operator": "=",
+                  "value": "*"
+                },
+                "type": "notable_event_field"
+              },
+              {
+                "config": {
+                  "field": "source",
+                  "operator": "=",
+                  "value": "DriftDetection"
+                },
+                "type": "notable_event_field"
+              }
+            ]
+          },
+          "type": "clause"
+        }
+      ]
+    },
+    "group_assignee": "%owner%",
+    "group_custom_instruction": "",
+    "group_dashboard": "",
+    "group_dashboard_context": "first",
+    "group_description": "%last_description%",
+    "group_instruction": "%itsi_instruction%",
+    "group_severity": "%last_severity%",
+    "group_status": "%status%",
+    "group_title": "%last_title%",
+    "identifying_name": "kpi drift policy",
+    "is_default": 0,
+    "mod_time": 1754873333.6872694,
+    "object_type": "notable_aggregation_policy",
+    "priority": "",
+    "rules": [
+      {
+        "_key": "kpi_drift_policy_rule_1",
+        "actions": [
+          {
+            "condition": "AND",
+            "items": [
+              {
+                "config": {
+                  "field": "status",
+                  "value": "5"
+                },
+                "execution_criteria": {
+                  "execute_on": "GROUP"
+                },
+                "type": "notable_event_change"
+              }
+            ]
+          }
+        ],
+        "activation_criteria": {
+          "condition": "AND",
+          "items": [
+            {
+              "type": "breaking_criteria"
+            }
+          ]
+        },
+        "description": "",
+        "priority": 5,
+        "repeatAction": false,
+        "repetition_criteria": {
+          "duration": 300,
+          "execute_on": "episode_acknowledge"
+        },
+        "runOnce": false,
+        "title": ""
+      }
+    ],
+    "run_time_based_actions_once": 0,
+    "service_topology_enabled": 1,
+    "source_itsi_da": "itsi",
+    "split_by_field": "kpiid,drift_type,start_time",
+    "sub_group_limit": "",
+    "title": "KPI drift policy"
+  },
+  {
+    "_key": "normalized_aggregation_policy",
+    "_owner": "nobody",
+    "_user": "nobody",
+    "ace_breaking_criteria": {
+      "condition": "OR",
+      "items": [
+        {
+          "config": {
+            "limit": "7200"
+          },
+          "type": "pause"
+        }
+      ]
+    },
+    "ace_enabled": 0,
+    "ace_factor_fields": [],
+    "ace_factor_weights": [
+      {
+        "factor_name": "text",
+        "factor_weight": 0.5
+      },
+      {
+        "factor_name": "attribute",
+        "factor_weight": 0.5
+      }
+    ],
+    "ace_field_analysis_end_time": 0,
+    "ace_field_analysis_start_time": 0,
+    "ace_group_assignee": "%owner%",
+    "ace_group_dashboard": "",
+    "ace_group_dashboard_context": "first",
+    "ace_group_description": "%description%",
+    "ace_group_instruction": "%itsi_instruction%",
+    "ace_group_severity": "%severity%",
+    "ace_group_status": "%status%",
+    "ace_group_title": "%title%",
+    "ace_split_by_field": "",
+    "acl": {
+      "can_change_perms": true,
+      "can_share_app": true,
+      "can_share_global": true,
+      "can_share_user": true,
+      "can_write": true,
+      "modifiable": true,
+      "owner": "admin",
+      "perms": {
+        "read": [
+          "*"
+        ],
+        "write": [
+          "*"
+        ]
+      },
+      "sharing": "app"
+    },
+    "aice_enabled": 0,
+    "aice_fields_list": [],
+    "aice_generated_fields": {},
+    "breaking_criteria": {
+      "condition": "OR",
+      "items": [
+        {
+          "config": {
+            "limit": "3600"
+          },
+          "type": "pause"
+        },
+        {
+          "config": {
+            "condition": "AND",
+            "items": [
+              {
+                "config": {
+                  "field": "severity",
+                  "operator": "=",
+                  "value": "2"
+                },
+                "type": "notable_event_field"
+              }
+            ]
+          },
+          "type": "clause"
+        }
+      ]
+    },
+    "create_time": 1753775970.5018828,
+    "description": "Applies to events that contain ITSI normalized fields.",
+    "disabled": 1,
+    "entity_factor_enabled": 1,
+    "filter_criteria": {
+      "condition": "OR",
+      "items": [
+        {
+          "config": {
+            "condition": "AND",
+            "items": [
+              {
+                "config": {
+                  "field": "itsiAlert",
+                  "operator": "=",
+                  "value": "*"
+                },
+                "type": "notable_event_field"
+              },
+              {
+                "config": {
+                  "field": "itsiInstance",
+                  "operator": "=",
+                  "value": "*"
+                },
+                "type": "notable_event_field"
+              },
+              {
+                "config": {
+                  "field": "itsiSubInstance",
+                  "operator": "=",
+                  "value": "*"
+                },
+                "type": "notable_event_field"
+              },
+              {
+                "config": {
+                  "field": "itsiSeverity",
+                  "operator": "=",
+                  "value": "*"
+                },
+                "type": "notable_event_field"
+              }
+            ]
+          },
+          "type": "clause"
+        }
+      ]
+    },
+    "group_assignee": "%owner%",
+    "group_custom_instruction": "",
+    "group_dashboard": "",
+    "group_dashboard_context": "first",
+    "group_description": "%last_description%",
+    "group_instruction": "%last_instruction%",
+    "group_severity": "%last_severity%",
+    "group_status": "%status%",
+    "group_title": "Normalized Alert for %itsiInstance% (%itsiSubInstance%) : %itsiAlert%",
+    "identifying_name": "normalized policy (splunk app for infrastructure)",
+    "is_default": 0,
+    "mod_time": 1754873334.134878,
+    "object_type": "notable_aggregation_policy",
+    "priority": "",
+    "rules": [
+      {
+        "_key": "normalized_aggregation_policy_action_2",
+        "actions": [
+          {
+            "condition": "AND",
+            "items": [
+              {
+                "config": {
+                  "field": "status",
+                  "value": "5"
+                },
+                "execution_criteria": {
+                  "execute_on": "GROUP"
+                },
+                "type": "notable_event_change"
+              }
+            ]
+          }
+        ],
+        "activation_criteria": {
+          "condition": "AND",
+          "items": [
+            {
+              "type": "breaking_criteria"
+            },
+            {
+              "config": {
+                "limit": "1",
+                "operator": "=="
+              },
+              "type": "notable_event_count"
+            }
+          ]
+        },
+        "description": "",
+        "priority": 5,
+        "repeatAction": false,
+        "repetition_criteria": {
+          "duration": 300,
+          "execute_on": "episode_acknowledge"
+        },
+        "runOnce": false,
+        "title": ""
+      },
+      {
+        "_key": "normalized_aggregation_policy_action_1",
+        "actions": [
+          {
+            "condition": "AND",
+            "items": [
+              {
+                "config": {
+                  "field": "status",
+                  "value": "4"
+                },
+                "execution_criteria": {
+                  "execute_on": "GROUP"
+                },
+                "type": "notable_event_change"
+              }
+            ]
+          }
+        ],
+        "activation_criteria": {
+          "condition": "AND",
+          "items": [
+            {
+              "type": "breaking_criteria"
+            },
+            {
+              "config": {
+                "limit": "2",
+                "operator": ">="
+              },
+              "type": "notable_event_count"
+            }
+          ]
+        },
+        "description": "",
+        "priority": 5,
+        "repeatAction": false,
+        "repetition_criteria": {
+          "duration": 300,
+          "execute_on": "episode_acknowledge"
+        },
+        "runOnce": false,
+        "title": ""
+      }
+    ],
+    "service_topology_enabled": 1,
+    "source_itsi_da": "itsi",
+    "split_by_field": "itsiAlert,itsiInstance",
+    "sub_group_limit": "",
+    "title": "Normalized Policy (Splunk App for Infrastructure)"
+  }
+]

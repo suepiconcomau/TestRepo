@@ -1,1 +1,1527 @@
-[{"dashboard_drilldowns": [{"title": "*nix Overview Dashboard", "id": "nix_overview_dashboard", "base_url": "", "dashboard_type": "udf_dashboard", "params": {"static_params": {}, "alias_param_map": [{"ds_source": "ITSI Import Objects - OS", "alias": "ds_sources-host", "param": "title"}]}}], "data_drilldowns": [{"title": "System metrics", "type": "metrics", "static_filter": {"type": "include", "field": "metric_name", "values": ["*"]}, "entity_field_filter": {"type": "entity", "data_field": "host", "entity_field": "host"}}, {"title": "*nix logs", "type": "events", "static_filter": {"type": "include", "field": "sourcetype", "values": ["*"]}, "entity_field_filter": {"type": "entity", "data_field": "host", "entity_field": "host"}}], "description": "*nix type", "title": "*nix", "vital_metrics": [{"metric_name": "CPU Utilization", "search": "| mstats min(cpu.idle) as val WHERE `itsi_entity_type_nix_metrics_indexes` by host span=1m | eval val=100-val", "split_by_fields": ["host"], "matching_entity_fields": ["host"], "is_key": 1, "unit": "%"}, {"metric_name": "Memory Utilization", "search": "| mstats max(memory.used) as val WHERE `itsi_entity_type_nix_metrics_indexes` by host span=1m", "split_by_fields": ["host"], "matching_entity_fields": ["host"], "is_key": 0, "unit": "%"}, {"metric_name": "Disk Utilization", "search": "| mstats max(df.used) as val WHERE `itsi_entity_type_nix_metrics_indexes` by host span=1m", "split_by_fields": ["host"], "matching_entity_fields": ["host"], "is_key": 0, "unit": "%"}, {"metric_name": "Average Network Traffic", "search": "| mstats avg(interface.octets.tx) as tx, avg(interface.octets.rx) as rx WHERE `itsi_entity_type_nix_metrics_indexes` by host span=5m | eval val=round((tx+rx)/2/1024,2) ", "split_by_fields": ["host"], "matching_entity_fields": ["host"], "is_key": 0, "unit": "KB/s"}], "mod_source": "ITSI default import", "_is_from_conf": 1, "object_type": "entity_type", "mod_timestamp": "2025-08-26T00:41:33.131628+00:00", "_version": "4.20.1", "identifying_name": "*nix", "_user": "nobody", "_key": "nix"}, {"dashboard_drilldowns": [], "data_drilldowns": [{"title": "Kubernetes Node metrics", "type": "metrics", "static_filter": {"type": "include", "field": "metric_name", "values": ["kube.node.*"]}, "entity_field_filter": {"type": "entity", "data_field": "node", "entity_field": "node"}}, {"title": "Kubernetes Node logs", "type": "events", "static_filter": {"type": "include", "field": "sourcetype", "values": ["*"]}, "entity_field_filter": {"type": "entity", "data_field": "host", "entity_field": "node"}}, {"title": "Kubernetes Node metadata", "type": "events", "static_filter": {"type": "include", "field": "sourcetype", "values": ["kube:objects:nodes"]}, "entity_field_filter": {"type": "entity", "data_field": "metadata.name", "entity_field": "node"}}], "description": "Kubernetes Node type", "title": "Kubernetes Node", "vital_metrics": [{"metric_name": "Average CPU Usage", "search": "| mstats avg(kube.node.cpu.usage_rate) as val WHERE `itsi_entity_type_k8s_node_metrics_indexes` by node span=5m", "split_by_fields": ["node"], "matching_entity_fields": ["node"], "is_key": 1, "unit": ""}, {"metric_name": "Average Memory Usage", "search": "| mstats avg(kube.node.memory.working_set_bytes) as val WHERE `itsi_entity_type_k8s_node_metrics_indexes` by node span=5m", "split_by_fields": ["node"], "matching_entity_fields": ["node"], "is_key": 0, "unit": "Bytes"}, {"metric_name": "Disk Available", "search": "| mstats sum(kube.node.filesystem.available) as available, sum(kube.node.filesystem.capacity) as capacity  WHERE `itsi_entity_type_k8s_node_metrics_indexes` by node span=5m | eval val=available/capacity", "split_by_fields": ["node"], "matching_entity_fields": ["node"], "is_key": 0, "unit": "%"}, {"metric_name": "Average Network Traffic", "search": "| mstats rate(kube.node.network.tx_bytes) as tx,rate(kube.node.network.rx_bytes) as rx WHERE `itsi_entity_type_k8s_node_metrics_indexes` by node span=5m | eval val=round((tx+rx)/1024,2) ", "split_by_fields": ["node"], "matching_entity_fields": ["node"], "is_key": 0, "unit": "KB/s"}], "mod_source": "ITSI default import", "_is_from_conf": 1, "object_type": "entity_type", "mod_timestamp": "2025-08-26T00:41:32.630467+00:00", "_version": "4.20.1", "identifying_name": "kubernetes node", "_user": "nobody", "_key": "k8s_node"}, {"dashboard_drilldowns": [], "data_drilldowns": [{"title": "Kubernetes Pod metrics", "type": "metrics", "static_filter": {"type": "include", "field": "metric_name", "values": ["kube.pod.*"]}, "entity_field_filter": {"type": "and", "filters": [{"type": "entity", "data_field": "pod-name", "entity_field": "pod-name"}, {"type": "entity", "data_field": "pod-namespace", "entity_field": "pod-namespace"}]}}, {"title": "Kubernetes Pod logs", "type": "events", "static_filter": {"type": "include", "field": "sourcetype", "values": ["kube:*"]}, "entity_field_filter": {"type": "and", "filters": [{"type": "entity", "data_field": "pod", "entity_field": "pod-name"}, {"type": "entity", "data_field": "namespace", "entity_field": "pod-namespace"}]}}, {"title": "Kubernetes Pod metadata", "type": "events", "static_filter": {"type": "include", "field": "sourcetype", "values": ["kube:objects:pods"]}, "entity_field_filter": {"type": "and", "filters": [{"type": "entity", "data_field": "pod", "entity_field": "pod-name"}, {"type": "entity", "data_field": "namespace", "entity_field": "pod-namespace"}]}}], "description": "Kubernetes Pod type", "title": "Kubernetes Pod", "vital_metrics": [{"metric_name": "Average CPU Usage", "search": "| mstats avg(kube.pod.cpu.usage_rate) as val WHERE `itsi_entity_type_k8s_pod_metrics_indexes` by pod-name, pod-namespace span=5m", "split_by_fields": ["pod-name", "pod-namespace"], "matching_entity_fields": ["pod-name", "pod-namespace"], "is_key": 1, "unit": ""}, {"metric_name": "Average Memory Usage", "search": "| mstats avg(kube.pod.memory.working_set_bytes) as val WHERE `itsi_entity_type_k8s_pod_metrics_indexes` by pod-name, pod-namespace span=5m", "split_by_fields": ["pod-name", "pod-namespace"], "matching_entity_fields": ["pod-name", "pod-namespace"], "is_key": 0, "unit": "Bytes"}, {"metric_name": "Average Network Traffic", "search": "| mstats rate(kube.pod.network.tx_bytes) as tx,rate(kube.pod.network.rx_bytes) as rx WHERE `itsi_entity_type_k8s_pod_metrics_indexes` by pod-name, pod-namespace span=5m | eval val=round((tx+rx)/1024,2)", "split_by_fields": ["pod-name", "pod-namespace"], "matching_entity_fields": ["pod-name", "pod-namespace"], "is_key": 0, "unit": "KB/s"}], "mod_source": "ITSI default import", "_is_from_conf": 1, "object_type": "entity_type", "mod_timestamp": "2025-08-26T00:41:32.922589+00:00", "_version": "4.20.1", "identifying_name": "kubernetes pod", "_user": "nobody", "_key": "k8s_pod"}, {"dashboard_drilldowns": [{"title": "Unix and Linux Add-on Overview Dashboard", "id": "addon_overview_dashboard", "base_url": "", "dashboard_type": "udf_dashboard", "params": {"static_params": {}, "alias_param_map": [{"ds_source": "ITSI Import Objects - TA *Nix", "alias": "ds_sources-host", "param": "title"}]}}], "data_drilldowns": [{"title": "System metrics", "type": "metrics", "static_filter": {"type": "include", "field": "metric_name", "values": ["*"]}, "entity_field_filter": {"type": "entity", "data_field": "host", "entity_field": "host"}}, {"title": "ta_nix logs", "type": "events", "static_filter": {"type": "include", "field": "sourcetype", "values": ["*"]}, "entity_field_filter": {"type": "entity", "data_field": "host", "entity_field": "host"}}], "description": "ta_nix type", "title": "Unix/Linux Add-on", "vital_metrics": [{"metric_name": "CPU Utilization", "search": "| mstats min(cpu_metric.pctIdle) as val WHERE `itsi_entity_type_ta_nix_metrics_indexes` AND CPU=\"all\" by host span=1m | eval val=100-val", "split_by_fields": ["host"], "matching_entity_fields": ["host"], "is_key": 1, "unit": "%"}, {"metric_name": "Memory Utilization", "search": "| mstats min(vmstat_metric.memFreePct) as val WHERE `itsi_entity_type_ta_nix_metrics_indexes` by host span=5m | eval val=100-val", "split_by_fields": ["host"], "matching_entity_fields": ["host"], "is_key": 0, "unit": "%"}, {"metric_name": "Disk Utilization", "search": "| mstats max(df_metric.UsePct) as val WHERE `itsi_entity_type_ta_nix_metrics_indexes` AND Filesystem=\"*\" by host span=5m", "split_by_fields": ["host"], "matching_entity_fields": ["host"], "is_key": 0, "unit": "%"}, {"metric_name": "Average Network Traffic", "search": "| mstats rate(interfaces_metric.TXbytes) as tx,rate(interfaces_metric.RXbytes) as rx WHERE `itsi_entity_type_ta_nix_metrics_indexes` by host span=5m | eval val=round((tx+rx)/2/1024,2) ", "split_by_fields": ["host"], "matching_entity_fields": ["host"], "is_key": 0, "unit": "KB/s"}], "mod_source": "ITSI default import", "_is_from_conf": 1, "object_type": "entity_type", "mod_timestamp": "2025-08-26T00:41:33.348981+00:00", "_version": "4.20.1", "identifying_name": "unix/linux add-on", "_user": "nobody", "_key": "ta_nix"}, {"dashboard_drilldowns": [{"title": "VMware Cluster Overview Dashboard", "id": "vmware_cluster_overview_dashboard", "base_url": "", "dashboard_type": "udf_dashboard", "params": {"static_params": {}, "alias_param_map": [{"ds_source": "ITSI Import Objects - VMWare Cluster", "alias": "ds_sources-name", "param": "title"}]}}], "data_drilldowns": [{"title": "VMware Cluster metrics", "type": "metrics", "static_filter": {"type": "include", "field": "metric_name", "values": ["vsphere.cluster.*"]}, "entity_field_filter": {"type": "and", "filters": [{"type": "entity", "data_field": "moid", "entity_field": "moid"}, {"type": "entity", "data_field": "vcenter", "entity_field": "vcenter"}]}}, {"title": "VMware Inventory logs", "type": "events", "static_filter": {"type": "include", "field": "index", "values": ["vmware-inv"]}, "entity_field_filter": {"type": "entity", "data_field": "moid", "entity_field": "moid"}}, {"title": "VMware Cluster Events logs", "type": "events", "static_filter": {"type": "and", "filters": [{"type": "include", "field": "index", "values": ["vmware-taskevent"]}, {"type": "include", "field": "sourcetype", "values": ["vmware_inframon:events"]}, {"type": "include", "field": "computeResource.computeResource.type", "values": ["ClusterComputeResource"]}]}, "entity_field_filter": {"type": "entity", "data_field": "computeResource.computeResource.moid", "entity_field": "moid"}}], "description": "VMware Cluster type", "title": "VMware Cluster", "vital_metrics": [{"metric_name": "Average CPU Usage", "search": "| mstats avg(vsphere.cluster.cpu.usage) as val WHERE `itsi_entity_type_vmware_cluster_metrics_indexes` by moid,vcenter span=5m | eval itsi_entity_id=moid.\"_\".vcenter", "split_by_fields": ["itsi_entity_id"], "matching_entity_fields": ["itsi_entity_id"], "is_key": 1, "unit": "%"}, {"metric_name": "Average Effective Memory", "search": "| mstats avg(vsphere.cluster.clusterServices.effectivemem) as val WHERE `itsi_entity_type_vmware_cluster_metrics_indexes` by moid,vcenter span=5m | eval itsi_entity_id=moid.\"_\".vcenter", "split_by_fields": ["itsi_entity_id"], "matching_entity_fields": ["itsi_entity_id"], "is_key": 0, "unit": "MB"}, {"metric_name": "Hosts Up", "search": "search index=vmware-inv sourcetype=vmware_inframon:inv:hostsystem | spath moid output=moid | spath changeSet.summary.runtime.powerState output=powerState | search powerState=poweredOn | bin span=1h _time | stats distinct_count(moid) as val by cluster.moid host _time | rename \"cluster.moid\" as moid | eval itsi_entity_id=moid.\"_\".host", "split_by_fields": ["itsi_entity_id"], "matching_entity_fields": ["itsi_entity_id"], "is_key": 0, "unit": ""}, {"metric_name": "Triggered Alarms", "search": "search index=vmware-taskevent sourcetype=vmware_inframon:events | spath entity.entity.moid output=moid | spath entity.entity.type output=etype | search moid=* etype=ClusterComputeResource | search eventClass=AlarmActionTriggeredEvent | eval isAlarmTriggered=if(eventClass=\"AlarmActionTriggeredEvent\",1,0) | bin span=1h _time | stats sum(isAlarmTriggered) by host, moid _time | eval itsi_entity_id=moid.\"_\".host", "split_by_fields": ["itsi_entity_id"], "matching_entity_fields": ["itsi_entity_id"], "is_key": 0, "unit": ""}], "mod_source": "ITSI default import", "_is_from_conf": 1, "object_type": "entity_type", "mod_timestamp": "2025-08-26T00:41:33.567765+00:00", "_version": "4.20.1", "identifying_name": "vmware cluster", "_user": "nobody", "_key": "vmware_cluster"}, {"dashboard_drilldowns": [{"title": "VMware Datastore Overview Dashboard", "id": "vmware_datastore_overview_dashboard", "base_url": "", "dashboard_type": "udf_dashboard", "params": {"static_params": {}, "alias_param_map": [{"ds_source": "ITSI Import Objects - VMware Datastore", "alias": "ds_sources-name", "param": "title"}]}}], "data_drilldowns": [{"title": "VMware Datastore metrics", "type": "metrics", "static_filter": {"type": "include", "field": "metric_name", "values": ["vsphere.datastore.*"]}, "entity_field_filter": {"type": "and", "filters": [{"type": "entity", "data_field": "moid", "entity_field": "moid"}, {"type": "entity", "data_field": "vcenter", "entity_field": "vcenter"}]}}, {"title": "VMware VM/ESXI Datastore metrics", "type": "metrics", "static_filter": {"type": "include", "field": "metric_name", "values": ["vsphere.*datastore.*"]}, "entity_field_filter": {"type": "and", "filters": [{"type": "entity", "data_field": "datastore", "entity_field": "moid"}, {"type": "entity", "data_field": "vcenter", "entity_field": "vcenter"}]}}, {"title": "VMware Datastore logs", "type": "events", "static_filter": {"type": "include", "field": "index", "values": ["vmware-inv"]}, "entity_field_filter": {"type": "entity", "data_field": "moid", "entity_field": "moid"}}, {"title": "VMware Datastore Events logs", "type": "events", "static_filter": {"type": "and", "filters": [{"type": "include", "field": "index", "values": ["vmware-taskevent"]}, {"type": "include", "field": "sourcetype", "values": ["vmware_inframon:events"]}, {"type": "include", "field": "objectType", "values": ["Datastore"]}]}, "entity_field_filter": {"type": "entity", "data_field": "objectId", "entity_field": "moid"}}], "description": "VMware datastore type", "title": "VMware Datastore", "vital_metrics": [{"metric_name": "Average Datastore Usage", "search": "| mstats avg(vsphere.datastore.used_percent) as val WHERE `itsi_entity_type_vmware_datastore_metrics_indexes` by moid,vcenter span=10m | eval itsi_entity_id=moid.\"_\".vcenter", "split_by_fields": ["itsi_entity_id"], "matching_entity_fields": ["itsi_entity_id"], "is_key": 1, "unit": "%"}, {"metric_name": "Datastore Overprovisioned", "search": "| mstats avg(vsphere.datastore.freespace) as freespace, avg(vsphere.datastore.capacity) as capacity, avg(vsphere.datastore.uncommitted) as uncommitted WHERE `itsi_entity_type_vmware_datastore_metrics_indexes` by moid,vcenter span=5m | eval itsi_entity_id=moid.\"_\".vcenter |eval provisioned = (capacity-freespace+uncommitted) | eval overprovisioned_pct = (provisioned/capacity-1)*100 | eval val=overprovisioned_pct", "split_by_fields": ["itsi_entity_id"], "matching_entity_fields": ["itsi_entity_id"], "is_key": 0, "unit": "%"}, {"metric_name": "Average Datastore Read Latency", "search": "| mstats avg(vsphere.esxihost.datastore.totalReadLatency) as val WHERE `itsi_entity_type_vmware_datastore_metrics_indexes` by datastore, vcenter span=5m | eval itsi_entity_id=datastore.\"_\".vcenter", "split_by_fields": ["itsi_entity_id"], "matching_entity_fields": ["itsi_entity_id"], "is_key": 0, "unit": "ms"}, {"metric_name": "Average Datastore Write Latency", "search": "| mstats avg(vsphere.esxihost.datastore.totalWriteLatency) as val WHERE `itsi_entity_type_vmware_datastore_metrics_indexes` by datastore, vcenter span=5m | eval itsi_entity_id=datastore.\"_\".vcenter", "split_by_fields": ["itsi_entity_id"], "matching_entity_fields": ["itsi_entity_id"], "is_key": 0, "unit": "ms"}], "mod_source": "ITSI default import", "_is_from_conf": 1, "object_type": "entity_type", "mod_timestamp": "2025-08-26T00:41:33.800785+00:00", "_version": "4.20.1", "identifying_name": "vmware datastore", "_user": "nobody", "_key": "vmware_datastore"}, {"dashboard_drilldowns": [{"title": "VMware ESXi Overview Dashboard", "id": "vmware_esxi_overview_dashboard", "base_url": "", "dashboard_type": "udf_dashboard", "params": {"static_params": {}, "alias_param_map": [{"ds_source": "ITSI Import Objects - VMware Host", "alias": "ds_sources-name", "param": "title"}]}}], "data_drilldowns": [{"title": "VMware ESXi metrics", "type": "metrics", "static_filter": {"type": "include", "field": "metric_name", "values": ["vsphere.esxihost.*"]}, "entity_field_filter": {"type": "entity", "data_field": "uuid", "entity_field": "uuid"}}, {"title": "VMware Inventory logs", "type": "events", "static_filter": {"type": "include", "field": "index", "values": ["vmware-inv"]}, "entity_field_filter": {"type": "entity", "data_field": "moid", "entity_field": "moid"}}, {"title": "VMware Tasks logs", "type": "events", "static_filter": {"type": "and", "filters": [{"type": "include", "field": "index", "values": ["vmware-taskevent"]}, {"type": "include", "field": "sourcetype", "values": ["vmware_inframon:tasks"]}]}, "entity_field_filter": {"type": "entity", "data_field": "entity.moid", "entity_field": "moid"}}, {"title": "VMware ESXi Hosts Events logs", "type": "events", "static_filter": {"type": "and", "filters": [{"type": "include", "field": "index", "values": ["vmware-taskevent"]}, {"type": "include", "field": "sourcetype", "values": ["vmware_inframon:events"]}, {"type": "include", "field": "host.host.type", "values": ["HostSystem"]}]}, "entity_field_filter": {"type": "entity", "data_field": "host.host.moid", "entity_field": "moid"}}, {"title": "VMware ESXi logs", "type": "events", "static_filter": {"type": "include", "field": "index", "values": ["vmware-esxilog"]}, "entity_field_filter": {"type": "entity", "data_field": "host", "entity_field": "name"}}], "description": "VMware ESXi Host type", "title": "VMware ESXi Host", "vital_metrics": [{"metric_name": "Average CPU Usage", "search": "| mstats avg(vsphere.esxihost.cpu.usage) as val WHERE `itsi_entity_type_vmware_esxihost_metrics_indexes` by uuid span=5m", "split_by_fields": ["uuid"], "matching_entity_fields": ["uuid"], "is_key": 1, "unit": "%"}, {"metric_name": "Average Memory Usage", "search": "| mstats avg(vsphere.esxihost.mem.consumed) as val WHERE `itsi_entity_type_vmware_esxihost_metrics_indexes` by uuid span=5m", "split_by_fields": ["uuid"], "matching_entity_fields": ["uuid"], "is_key": 0, "unit": "KB"}, {"metric_name": "Average Datastore Latency", "search": "| mstats avg(vsphere.esxihost.datastore.totalReadLatency) as rl,avg(vsphere.esxihost.datastore.totalWriteLatency) as wl WHERE `itsi_entity_type_vmware_esxihost_metrics_indexes` by uuid span=5m | eval val=(rl+wl)/2 ", "split_by_fields": ["uuid"], "matching_entity_fields": ["uuid"], "is_key": 0, "unit": "ms"}, {"metric_name": "Average Network Traffic", "search": "| mstats avg(vsphere.esxihost.net.transmitted) as tx,avg(vsphere.esxihost.net.received) as rx WHERE `itsi_entity_type_vmware_esxihost_metrics_indexes` by uuid span=5m | eval val=round((tx+rx)/2/1024,2)", "split_by_fields": ["uuid"], "matching_entity_fields": ["uuid"], "is_key": 0, "unit": "MB/s"}], "mod_source": "ITSI default import", "_is_from_conf": 1, "object_type": "entity_type", "mod_timestamp": "2025-08-26T00:41:34.042230+00:00", "_version": "4.20.1", "identifying_name": "vmware esxi host", "_user": "nobody", "_key": "vmware_esxi_host"}, {"dashboard_drilldowns": [{"title": "VMware vCenter Overview Dashboard", "id": "vmware_vcenter_overview_dashboard", "base_url": "", "dashboard_type": "udf_dashboard", "params": {"static_params": {}, "alias_param_map": [{"ds_source": "ITSI Import Objects - VMware vCenter", "alias": "ds_sources-vcenter", "param": "title"}]}}], "data_drilldowns": [{"title": "VMware vCenter metrics", "type": "metrics", "static_filter": {"type": "include", "field": "metric_name", "values": ["vsphere.*"]}, "entity_field_filter": {"type": "entity", "data_field": "vcenter", "entity_field": "vcenter"}}, {"title": "VMware Inventory logs", "type": "events", "static_filter": {"type": "include", "field": "index", "values": ["vmware-inv"]}, "entity_field_filter": {"type": "entity", "data_field": "host", "entity_field": "vcenter"}}, {"title": "VMware vCenter Tasks and Events logs", "type": "events", "static_filter": {"type": "include", "field": "index", "values": ["vmware-taskevent"]}, "entity_field_filter": {"type": "entity", "data_field": "host", "entity_field": "vcenter"}}, {"title": "VMware vCenter logs", "type": "events", "static_filter": {"type": "include", "field": "index", "values": ["vmware-vclog"]}, "entity_field_filter": {"type": "entity", "data_field": "host", "entity_field": "vcenter"}}], "description": "VMware vCenter type", "title": "VMware vCenter", "vital_metrics": [{"metric_name": "Average CPU Usage", "search": "| mstats avg(vsphere.vc.vcResources.systemcpuusage) as val WHERE `itsi_entity_type_vmware_vcenter_metrics_indexes` by vcenter span=5m", "split_by_fields": ["vcenter"], "matching_entity_fields": ["vcenter"], "is_key": 1, "unit": "%"}, {"metric_name": "Average Physical Memory Usage", "search": "| mstats avg(vsphere.vc.vcResources.physicalmemusage) as val WHERE `itsi_entity_type_vmware_vcenter_metrics_indexes` by vcenter span=5m", "split_by_fields": ["vcenter"], "matching_entity_fields": ["vcenter"], "is_key": 0, "unit": "KB"}, {"metric_name": "Average Virtual Memory Usage", "search": "| mstats avg(vsphere.vc.vcResources.virtualmemusage) as val WHERE `itsi_entity_type_vmware_vcenter_metrics_indexes` by vcenter span=5m", "split_by_fields": ["vcenter"], "matching_entity_fields": ["vcenter"], "is_key": 0, "unit": "KB"}, {"metric_name": "VCSA Failures", "search": "search index=vmware-vclog sourcetype=vmware:vclog:vpxd host=* error | bin span=5m _time | stats count as val by host, _time", "split_by_fields": ["host"], "matching_entity_fields": ["vcenter"], "is_key": 0, "unit": ""}], "mod_source": "ITSI default import", "_is_from_conf": 1, "object_type": "entity_type", "mod_timestamp": "2025-08-26T00:41:34.265992+00:00", "_version": "4.20.1", "identifying_name": "vmware vcenter", "_user": "nobody", "_key": "vmware_vcenter"}, {"dashboard_drilldowns": [{"title": "VMware VM Overview Dashboard", "id": "vmware_vm_overview_dashboard", "base_url": "", "dashboard_type": "udf_dashboard", "params": {"static_params": {}, "alias_param_map": [{"ds_source": "ITSI Import Objects - VMware VM", "alias": "ds_sources-name", "param": "title"}]}}], "data_drilldowns": [{"title": "VMware VM metrics", "type": "metrics", "static_filter": {"type": "include", "field": "metric_name", "values": ["vsphere.vm.*"]}, "entity_field_filter": {"type": "entity", "data_field": "uuid", "entity_field": "uuid"}}, {"title": "VMware Inventory logs", "type": "events", "static_filter": {"type": "include", "field": "index", "values": ["vmware-inv"]}, "entity_field_filter": {"type": "entity", "data_field": "moid", "entity_field": "moid"}}, {"title": "VMware Tasks logs", "type": "events", "static_filter": {"type": "and", "filters": [{"type": "include", "field": "index", "values": ["vmware-taskevent"]}, {"type": "include", "field": "sourcetype", "values": ["vmware_inframon:tasks"]}]}, "entity_field_filter": {"type": "entity", "data_field": "entity.moid", "entity_field": "moid"}}, {"title": "VMware Events logs", "type": "events", "static_filter": {"type": "and", "filters": [{"type": "include", "field": "index", "values": ["vmware-taskevent"]}, {"type": "include", "field": "sourcetype", "values": ["vmware_inframon:events"]}]}, "entity_field_filter": {"type": "entity", "data_field": "entity.entity.moid", "entity_field": "moid"}}], "description": "VMware VM type", "title": "VMware VM", "vital_metrics": [{"metric_name": "Average CPU Usage", "search": "| mstats avg(vsphere.vm.cpu.usage) as val WHERE `itsi_entity_type_vmware_vm_metrics_indexes` by uuid span=5m", "split_by_fields": ["uuid"], "matching_entity_fields": ["uuid"], "is_key": 1, "unit": "%"}, {"metric_name": "Average Memory Usage", "search": "| mstats avg(vsphere.vm.mem.usage) as val WHERE `itsi_entity_type_vmware_vm_metrics_indexes` by uuid span=5m", "split_by_fields": ["uuid"], "matching_entity_fields": ["uuid"], "is_key": 0, "unit": "%"}, {"metric_name": "Average Datastore Latency", "search": "| mstats avg(vsphere.vm.datastore.totalReadLatency) as rl,avg(vsphere.vm.datastore.totalWriteLatency) as wl WHERE `itsi_entity_type_vmware_vm_metrics_indexes` by uuid span=5m | eval val= (rl+wl)/2 ", "split_by_fields": ["uuid"], "matching_entity_fields": ["uuid"], "is_key": 0, "unit": "ms"}, {"metric_name": "Average Network Usage", "search": "| mstats avg(vsphere.vm.net.transmitted) as tx,avg(vsphere.vm.net.received) as rx WHERE `itsi_entity_type_vmware_vm_metrics_indexes` by uuid span=5m | eval val= (tx+rx)/2 ", "split_by_fields": ["uuid"], "matching_entity_fields": ["uuid"], "is_key": 0, "unit": "KB/s"}], "mod_source": "ITSI default import", "_is_from_conf": 1, "object_type": "entity_type", "mod_timestamp": "2025-08-26T00:41:34.496324+00:00", "_version": "4.20.1", "identifying_name": "vmware vm", "_user": "nobody", "_key": "vmware_vm"}, {"dashboard_drilldowns": [{"title": "Windows Overview Dashboard", "id": "windows_overview_dashboard", "base_url": "", "dashboard_type": "udf_dashboard", "params": {"static_params": {}, "alias_param_map": [{"ds_source": "ITSI Import Objects - Perfmon", "alias": "ds_sources-host", "param": "title"}]}}, {"title": "Application Crashes - Windows", "id": "windows_applicationcrashes", "base_url": "", "dashboard_type": "xml_dashboard", "params": {"static_params": {}, "alias_param_map": []}}, {"title": "Application Installs - Windows", "id": "windows_applicationinstalls", "base_url": "", "dashboard_type": "xml_dashboard", "params": {"static_params": {}, "alias_param_map": []}}, {"title": "Event Monitoring - Windows", "id": "windows_event", "base_url": "", "dashboard_type": "xml_dashboard", "params": {"static_params": {}, "alias_param_map": []}}, {"title": "Host Information - Windows", "id": "host_information", "base_url": "", "dashboard_type": "xml_dashboard", "params": {"static_params": {}, "alias_param_map": []}}, {"title": "Network Activity - Windows", "id": "windows_networkmonitoring", "base_url": "", "dashboard_type": "xml_dashboard", "params": {"static_params": {}, "alias_param_map": []}}, {"title": "Processes - Windows", "id": "windows_processes", "base_url": "", "dashboard_type": "xml_dashboard", "params": {"static_params": {}, "alias_param_map": []}}, {"title": "Services - Windows", "id": "windows_services", "base_url": "", "dashboard_type": "xml_dashboard", "params": {"static_params": {}, "alias_param_map": []}}, {"title": "Windows Update - Windows", "id": "windows_windowsupdate", "base_url": "", "dashboard_type": "xml_dashboard", "params": {"static_params": {}, "alias_param_map": []}}], "data_drilldowns": [{"title": "System metrics", "type": "metrics", "static_filter": {"type": "include", "field": "metric_name", "values": ["*"]}, "entity_field_filter": {"type": "entity", "data_field": "host", "entity_field": "host"}}, {"title": "Windows logs", "type": "events", "static_filter": {"type": "include", "field": "sourcetype", "values": ["*"]}, "entity_field_filter": {"type": "entity", "data_field": "host", "entity_field": "host"}}], "description": "Windows type", "title": "Windows", "vital_metrics": [{"metric_name": "CPU Utilization", "search": "| mstats min(Processor.%_Idle_Time) as val WHERE `itsi_entity_type_windows_metrics_indexes` instance=\"_Total\" by host span=1m | eval val=100-val", "split_by_fields": ["host"], "matching_entity_fields": ["host"], "is_key": 1, "unit": "%"}, {"metric_name": "Memory Utilization", "search": "| mstats max(Memory.%_Committed_Bytes_In_Use) as val WHERE `itsi_entity_type_windows_metrics_indexes` by host span=1m", "split_by_fields": ["host"], "matching_entity_fields": ["host"], "is_key": 0, "unit": "%"}, {"metric_name": "Disk Utilization", "search": "| mstats min(LogicalDisk.%_Free_Space) as val WHERE `itsi_entity_type_windows_metrics_indexes` AND NOT instance=\"_Total\" AND instance=\"*\" by host span=1m | eval val=100-val", "split_by_fields": ["host"], "matching_entity_fields": ["host"], "is_key": 0, "unit": "%"}, {"metric_name": "Average Network Usage", "search": "| mstats avg(Network_Interface.Bytes_Sent/sec) as tx,avg(Network_Interface.Bytes_Received/sec) as rx WHERE `itsi_entity_type_windows_metrics_indexes` by host span=5m | eval val=round((tx+rx)/2/1024,2) ", "split_by_fields": ["host"], "matching_entity_fields": ["host"], "is_key": 0, "unit": "KB/s"}], "mod_source": "ITSI default import", "_is_from_conf": 1, "object_type": "entity_type", "mod_timestamp": "2025-08-26T00:41:34.767029+00:00", "_version": "4.20.1", "identifying_name": "windows", "_user": "nobody", "_key": "windows"}]
+[
+  {
+    "_is_from_conf": 1,
+    "_key": "nix",
+    "_user": "nobody",
+    "_version": "4.20.1",
+    "dashboard_drilldowns": [
+      {
+        "base_url": "",
+        "dashboard_type": "udf_dashboard",
+        "id": "nix_overview_dashboard",
+        "params": {
+          "alias_param_map": [
+            {
+              "alias": "ds_sources-host",
+              "ds_source": "ITSI Import Objects - OS",
+              "param": "title"
+            }
+          ],
+          "static_params": {}
+        },
+        "title": "*nix Overview Dashboard"
+      }
+    ],
+    "data_drilldowns": [
+      {
+        "entity_field_filter": {
+          "data_field": "host",
+          "entity_field": "host",
+          "type": "entity"
+        },
+        "static_filter": {
+          "field": "metric_name",
+          "type": "include",
+          "values": [
+            "*"
+          ]
+        },
+        "title": "System metrics",
+        "type": "metrics"
+      },
+      {
+        "entity_field_filter": {
+          "data_field": "host",
+          "entity_field": "host",
+          "type": "entity"
+        },
+        "static_filter": {
+          "field": "sourcetype",
+          "type": "include",
+          "values": [
+            "*"
+          ]
+        },
+        "title": "*nix logs",
+        "type": "events"
+      }
+    ],
+    "description": "*nix type",
+    "identifying_name": "*nix",
+    "mod_source": "ITSI default import",
+    "mod_timestamp": "2025-08-26T00:41:33.131628+00:00",
+    "object_type": "entity_type",
+    "title": "*nix",
+    "vital_metrics": [
+      {
+        "is_key": 1,
+        "matching_entity_fields": [
+          "host"
+        ],
+        "metric_name": "CPU Utilization",
+        "search": "| mstats min(cpu.idle) as val WHERE `itsi_entity_type_nix_metrics_indexes` by host span=1m | eval val=100-val",
+        "split_by_fields": [
+          "host"
+        ],
+        "unit": "%"
+      },
+      {
+        "is_key": 0,
+        "matching_entity_fields": [
+          "host"
+        ],
+        "metric_name": "Memory Utilization",
+        "search": "| mstats max(memory.used) as val WHERE `itsi_entity_type_nix_metrics_indexes` by host span=1m",
+        "split_by_fields": [
+          "host"
+        ],
+        "unit": "%"
+      },
+      {
+        "is_key": 0,
+        "matching_entity_fields": [
+          "host"
+        ],
+        "metric_name": "Disk Utilization",
+        "search": "| mstats max(df.used) as val WHERE `itsi_entity_type_nix_metrics_indexes` by host span=1m",
+        "split_by_fields": [
+          "host"
+        ],
+        "unit": "%"
+      },
+      {
+        "is_key": 0,
+        "matching_entity_fields": [
+          "host"
+        ],
+        "metric_name": "Average Network Traffic",
+        "search": "| mstats avg(interface.octets.tx) as tx, avg(interface.octets.rx) as rx WHERE `itsi_entity_type_nix_metrics_indexes` by host span=5m | eval val=round((tx+rx)/2/1024,2) ",
+        "split_by_fields": [
+          "host"
+        ],
+        "unit": "KB/s"
+      }
+    ]
+  },
+  {
+    "_is_from_conf": 1,
+    "_key": "k8s_node",
+    "_user": "nobody",
+    "_version": "4.20.1",
+    "dashboard_drilldowns": [],
+    "data_drilldowns": [
+      {
+        "entity_field_filter": {
+          "data_field": "node",
+          "entity_field": "node",
+          "type": "entity"
+        },
+        "static_filter": {
+          "field": "metric_name",
+          "type": "include",
+          "values": [
+            "kube.node.*"
+          ]
+        },
+        "title": "Kubernetes Node metrics",
+        "type": "metrics"
+      },
+      {
+        "entity_field_filter": {
+          "data_field": "host",
+          "entity_field": "node",
+          "type": "entity"
+        },
+        "static_filter": {
+          "field": "sourcetype",
+          "type": "include",
+          "values": [
+            "*"
+          ]
+        },
+        "title": "Kubernetes Node logs",
+        "type": "events"
+      },
+      {
+        "entity_field_filter": {
+          "data_field": "metadata.name",
+          "entity_field": "node",
+          "type": "entity"
+        },
+        "static_filter": {
+          "field": "sourcetype",
+          "type": "include",
+          "values": [
+            "kube:objects:nodes"
+          ]
+        },
+        "title": "Kubernetes Node metadata",
+        "type": "events"
+      }
+    ],
+    "description": "Kubernetes Node type",
+    "identifying_name": "kubernetes node",
+    "mod_source": "ITSI default import",
+    "mod_timestamp": "2025-08-26T00:41:32.630467+00:00",
+    "object_type": "entity_type",
+    "title": "Kubernetes Node",
+    "vital_metrics": [
+      {
+        "is_key": 1,
+        "matching_entity_fields": [
+          "node"
+        ],
+        "metric_name": "Average CPU Usage",
+        "search": "| mstats avg(kube.node.cpu.usage_rate) as val WHERE `itsi_entity_type_k8s_node_metrics_indexes` by node span=5m",
+        "split_by_fields": [
+          "node"
+        ],
+        "unit": ""
+      },
+      {
+        "is_key": 0,
+        "matching_entity_fields": [
+          "node"
+        ],
+        "metric_name": "Average Memory Usage",
+        "search": "| mstats avg(kube.node.memory.working_set_bytes) as val WHERE `itsi_entity_type_k8s_node_metrics_indexes` by node span=5m",
+        "split_by_fields": [
+          "node"
+        ],
+        "unit": "Bytes"
+      },
+      {
+        "is_key": 0,
+        "matching_entity_fields": [
+          "node"
+        ],
+        "metric_name": "Disk Available",
+        "search": "| mstats sum(kube.node.filesystem.available) as available, sum(kube.node.filesystem.capacity) as capacity  WHERE `itsi_entity_type_k8s_node_metrics_indexes` by node span=5m | eval val=available/capacity",
+        "split_by_fields": [
+          "node"
+        ],
+        "unit": "%"
+      },
+      {
+        "is_key": 0,
+        "matching_entity_fields": [
+          "node"
+        ],
+        "metric_name": "Average Network Traffic",
+        "search": "| mstats rate(kube.node.network.tx_bytes) as tx,rate(kube.node.network.rx_bytes) as rx WHERE `itsi_entity_type_k8s_node_metrics_indexes` by node span=5m | eval val=round((tx+rx)/1024,2) ",
+        "split_by_fields": [
+          "node"
+        ],
+        "unit": "KB/s"
+      }
+    ]
+  },
+  {
+    "_is_from_conf": 1,
+    "_key": "k8s_pod",
+    "_user": "nobody",
+    "_version": "4.20.1",
+    "dashboard_drilldowns": [],
+    "data_drilldowns": [
+      {
+        "entity_field_filter": {
+          "filters": [
+            {
+              "data_field": "pod-name",
+              "entity_field": "pod-name",
+              "type": "entity"
+            },
+            {
+              "data_field": "pod-namespace",
+              "entity_field": "pod-namespace",
+              "type": "entity"
+            }
+          ],
+          "type": "and"
+        },
+        "static_filter": {
+          "field": "metric_name",
+          "type": "include",
+          "values": [
+            "kube.pod.*"
+          ]
+        },
+        "title": "Kubernetes Pod metrics",
+        "type": "metrics"
+      },
+      {
+        "entity_field_filter": {
+          "filters": [
+            {
+              "data_field": "pod",
+              "entity_field": "pod-name",
+              "type": "entity"
+            },
+            {
+              "data_field": "namespace",
+              "entity_field": "pod-namespace",
+              "type": "entity"
+            }
+          ],
+          "type": "and"
+        },
+        "static_filter": {
+          "field": "sourcetype",
+          "type": "include",
+          "values": [
+            "kube:*"
+          ]
+        },
+        "title": "Kubernetes Pod logs",
+        "type": "events"
+      },
+      {
+        "entity_field_filter": {
+          "filters": [
+            {
+              "data_field": "pod",
+              "entity_field": "pod-name",
+              "type": "entity"
+            },
+            {
+              "data_field": "namespace",
+              "entity_field": "pod-namespace",
+              "type": "entity"
+            }
+          ],
+          "type": "and"
+        },
+        "static_filter": {
+          "field": "sourcetype",
+          "type": "include",
+          "values": [
+            "kube:objects:pods"
+          ]
+        },
+        "title": "Kubernetes Pod metadata",
+        "type": "events"
+      }
+    ],
+    "description": "Kubernetes Pod type",
+    "identifying_name": "kubernetes pod",
+    "mod_source": "ITSI default import",
+    "mod_timestamp": "2025-08-26T00:41:32.922589+00:00",
+    "object_type": "entity_type",
+    "title": "Kubernetes Pod",
+    "vital_metrics": [
+      {
+        "is_key": 1,
+        "matching_entity_fields": [
+          "pod-name",
+          "pod-namespace"
+        ],
+        "metric_name": "Average CPU Usage",
+        "search": "| mstats avg(kube.pod.cpu.usage_rate) as val WHERE `itsi_entity_type_k8s_pod_metrics_indexes` by pod-name, pod-namespace span=5m",
+        "split_by_fields": [
+          "pod-name",
+          "pod-namespace"
+        ],
+        "unit": ""
+      },
+      {
+        "is_key": 0,
+        "matching_entity_fields": [
+          "pod-name",
+          "pod-namespace"
+        ],
+        "metric_name": "Average Memory Usage",
+        "search": "| mstats avg(kube.pod.memory.working_set_bytes) as val WHERE `itsi_entity_type_k8s_pod_metrics_indexes` by pod-name, pod-namespace span=5m",
+        "split_by_fields": [
+          "pod-name",
+          "pod-namespace"
+        ],
+        "unit": "Bytes"
+      },
+      {
+        "is_key": 0,
+        "matching_entity_fields": [
+          "pod-name",
+          "pod-namespace"
+        ],
+        "metric_name": "Average Network Traffic",
+        "search": "| mstats rate(kube.pod.network.tx_bytes) as tx,rate(kube.pod.network.rx_bytes) as rx WHERE `itsi_entity_type_k8s_pod_metrics_indexes` by pod-name, pod-namespace span=5m | eval val=round((tx+rx)/1024,2)",
+        "split_by_fields": [
+          "pod-name",
+          "pod-namespace"
+        ],
+        "unit": "KB/s"
+      }
+    ]
+  },
+  {
+    "_is_from_conf": 1,
+    "_key": "ta_nix",
+    "_user": "nobody",
+    "_version": "4.20.1",
+    "dashboard_drilldowns": [
+      {
+        "base_url": "",
+        "dashboard_type": "udf_dashboard",
+        "id": "addon_overview_dashboard",
+        "params": {
+          "alias_param_map": [
+            {
+              "alias": "ds_sources-host",
+              "ds_source": "ITSI Import Objects - TA *Nix",
+              "param": "title"
+            }
+          ],
+          "static_params": {}
+        },
+        "title": "Unix and Linux Add-on Overview Dashboard"
+      }
+    ],
+    "data_drilldowns": [
+      {
+        "entity_field_filter": {
+          "data_field": "host",
+          "entity_field": "host",
+          "type": "entity"
+        },
+        "static_filter": {
+          "field": "metric_name",
+          "type": "include",
+          "values": [
+            "*"
+          ]
+        },
+        "title": "System metrics",
+        "type": "metrics"
+      },
+      {
+        "entity_field_filter": {
+          "data_field": "host",
+          "entity_field": "host",
+          "type": "entity"
+        },
+        "static_filter": {
+          "field": "sourcetype",
+          "type": "include",
+          "values": [
+            "*"
+          ]
+        },
+        "title": "ta_nix logs",
+        "type": "events"
+      }
+    ],
+    "description": "ta_nix type",
+    "identifying_name": "unix/linux add-on",
+    "mod_source": "ITSI default import",
+    "mod_timestamp": "2025-08-26T00:41:33.348981+00:00",
+    "object_type": "entity_type",
+    "title": "Unix/Linux Add-on",
+    "vital_metrics": [
+      {
+        "is_key": 1,
+        "matching_entity_fields": [
+          "host"
+        ],
+        "metric_name": "CPU Utilization",
+        "search": "| mstats min(cpu_metric.pctIdle) as val WHERE `itsi_entity_type_ta_nix_metrics_indexes` AND CPU=\"all\" by host span=1m | eval val=100-val",
+        "split_by_fields": [
+          "host"
+        ],
+        "unit": "%"
+      },
+      {
+        "is_key": 0,
+        "matching_entity_fields": [
+          "host"
+        ],
+        "metric_name": "Memory Utilization",
+        "search": "| mstats min(vmstat_metric.memFreePct) as val WHERE `itsi_entity_type_ta_nix_metrics_indexes` by host span=5m | eval val=100-val",
+        "split_by_fields": [
+          "host"
+        ],
+        "unit": "%"
+      },
+      {
+        "is_key": 0,
+        "matching_entity_fields": [
+          "host"
+        ],
+        "metric_name": "Disk Utilization",
+        "search": "| mstats max(df_metric.UsePct) as val WHERE `itsi_entity_type_ta_nix_metrics_indexes` AND Filesystem=\"*\" by host span=5m",
+        "split_by_fields": [
+          "host"
+        ],
+        "unit": "%"
+      },
+      {
+        "is_key": 0,
+        "matching_entity_fields": [
+          "host"
+        ],
+        "metric_name": "Average Network Traffic",
+        "search": "| mstats rate(interfaces_metric.TXbytes) as tx,rate(interfaces_metric.RXbytes) as rx WHERE `itsi_entity_type_ta_nix_metrics_indexes` by host span=5m | eval val=round((tx+rx)/2/1024,2) ",
+        "split_by_fields": [
+          "host"
+        ],
+        "unit": "KB/s"
+      }
+    ]
+  },
+  {
+    "_is_from_conf": 1,
+    "_key": "vmware_cluster",
+    "_user": "nobody",
+    "_version": "4.20.1",
+    "dashboard_drilldowns": [
+      {
+        "base_url": "",
+        "dashboard_type": "udf_dashboard",
+        "id": "vmware_cluster_overview_dashboard",
+        "params": {
+          "alias_param_map": [
+            {
+              "alias": "ds_sources-name",
+              "ds_source": "ITSI Import Objects - VMWare Cluster",
+              "param": "title"
+            }
+          ],
+          "static_params": {}
+        },
+        "title": "VMware Cluster Overview Dashboard"
+      }
+    ],
+    "data_drilldowns": [
+      {
+        "entity_field_filter": {
+          "filters": [
+            {
+              "data_field": "moid",
+              "entity_field": "moid",
+              "type": "entity"
+            },
+            {
+              "data_field": "vcenter",
+              "entity_field": "vcenter",
+              "type": "entity"
+            }
+          ],
+          "type": "and"
+        },
+        "static_filter": {
+          "field": "metric_name",
+          "type": "include",
+          "values": [
+            "vsphere.cluster.*"
+          ]
+        },
+        "title": "VMware Cluster metrics",
+        "type": "metrics"
+      },
+      {
+        "entity_field_filter": {
+          "data_field": "moid",
+          "entity_field": "moid",
+          "type": "entity"
+        },
+        "static_filter": {
+          "field": "index",
+          "type": "include",
+          "values": [
+            "vmware-inv"
+          ]
+        },
+        "title": "VMware Inventory logs",
+        "type": "events"
+      },
+      {
+        "entity_field_filter": {
+          "data_field": "computeResource.computeResource.moid",
+          "entity_field": "moid",
+          "type": "entity"
+        },
+        "static_filter": {
+          "filters": [
+            {
+              "field": "index",
+              "type": "include",
+              "values": [
+                "vmware-taskevent"
+              ]
+            },
+            {
+              "field": "sourcetype",
+              "type": "include",
+              "values": [
+                "vmware_inframon:events"
+              ]
+            },
+            {
+              "field": "computeResource.computeResource.type",
+              "type": "include",
+              "values": [
+                "ClusterComputeResource"
+              ]
+            }
+          ],
+          "type": "and"
+        },
+        "title": "VMware Cluster Events logs",
+        "type": "events"
+      }
+    ],
+    "description": "VMware Cluster type",
+    "identifying_name": "vmware cluster",
+    "mod_source": "ITSI default import",
+    "mod_timestamp": "2025-08-26T00:41:33.567765+00:00",
+    "object_type": "entity_type",
+    "title": "VMware Cluster",
+    "vital_metrics": [
+      {
+        "is_key": 1,
+        "matching_entity_fields": [
+          "itsi_entity_id"
+        ],
+        "metric_name": "Average CPU Usage",
+        "search": "| mstats avg(vsphere.cluster.cpu.usage) as val WHERE `itsi_entity_type_vmware_cluster_metrics_indexes` by moid,vcenter span=5m | eval itsi_entity_id=moid.\"_\".vcenter",
+        "split_by_fields": [
+          "itsi_entity_id"
+        ],
+        "unit": "%"
+      },
+      {
+        "is_key": 0,
+        "matching_entity_fields": [
+          "itsi_entity_id"
+        ],
+        "metric_name": "Average Effective Memory",
+        "search": "| mstats avg(vsphere.cluster.clusterServices.effectivemem) as val WHERE `itsi_entity_type_vmware_cluster_metrics_indexes` by moid,vcenter span=5m | eval itsi_entity_id=moid.\"_\".vcenter",
+        "split_by_fields": [
+          "itsi_entity_id"
+        ],
+        "unit": "MB"
+      },
+      {
+        "is_key": 0,
+        "matching_entity_fields": [
+          "itsi_entity_id"
+        ],
+        "metric_name": "Hosts Up",
+        "search": "search index=vmware-inv sourcetype=vmware_inframon:inv:hostsystem | spath moid output=moid | spath changeSet.summary.runtime.powerState output=powerState | search powerState=poweredOn | bin span=1h _time | stats distinct_count(moid) as val by cluster.moid host _time | rename \"cluster.moid\" as moid | eval itsi_entity_id=moid.\"_\".host",
+        "split_by_fields": [
+          "itsi_entity_id"
+        ],
+        "unit": ""
+      },
+      {
+        "is_key": 0,
+        "matching_entity_fields": [
+          "itsi_entity_id"
+        ],
+        "metric_name": "Triggered Alarms",
+        "search": "search index=vmware-taskevent sourcetype=vmware_inframon:events | spath entity.entity.moid output=moid | spath entity.entity.type output=etype | search moid=* etype=ClusterComputeResource | search eventClass=AlarmActionTriggeredEvent | eval isAlarmTriggered=if(eventClass=\"AlarmActionTriggeredEvent\",1,0) | bin span=1h _time | stats sum(isAlarmTriggered) by host, moid _time | eval itsi_entity_id=moid.\"_\".host",
+        "split_by_fields": [
+          "itsi_entity_id"
+        ],
+        "unit": ""
+      }
+    ]
+  },
+  {
+    "_is_from_conf": 1,
+    "_key": "vmware_datastore",
+    "_user": "nobody",
+    "_version": "4.20.1",
+    "dashboard_drilldowns": [
+      {
+        "base_url": "",
+        "dashboard_type": "udf_dashboard",
+        "id": "vmware_datastore_overview_dashboard",
+        "params": {
+          "alias_param_map": [
+            {
+              "alias": "ds_sources-name",
+              "ds_source": "ITSI Import Objects - VMware Datastore",
+              "param": "title"
+            }
+          ],
+          "static_params": {}
+        },
+        "title": "VMware Datastore Overview Dashboard"
+      }
+    ],
+    "data_drilldowns": [
+      {
+        "entity_field_filter": {
+          "filters": [
+            {
+              "data_field": "moid",
+              "entity_field": "moid",
+              "type": "entity"
+            },
+            {
+              "data_field": "vcenter",
+              "entity_field": "vcenter",
+              "type": "entity"
+            }
+          ],
+          "type": "and"
+        },
+        "static_filter": {
+          "field": "metric_name",
+          "type": "include",
+          "values": [
+            "vsphere.datastore.*"
+          ]
+        },
+        "title": "VMware Datastore metrics",
+        "type": "metrics"
+      },
+      {
+        "entity_field_filter": {
+          "filters": [
+            {
+              "data_field": "datastore",
+              "entity_field": "moid",
+              "type": "entity"
+            },
+            {
+              "data_field": "vcenter",
+              "entity_field": "vcenter",
+              "type": "entity"
+            }
+          ],
+          "type": "and"
+        },
+        "static_filter": {
+          "field": "metric_name",
+          "type": "include",
+          "values": [
+            "vsphere.*datastore.*"
+          ]
+        },
+        "title": "VMware VM/ESXI Datastore metrics",
+        "type": "metrics"
+      },
+      {
+        "entity_field_filter": {
+          "data_field": "moid",
+          "entity_field": "moid",
+          "type": "entity"
+        },
+        "static_filter": {
+          "field": "index",
+          "type": "include",
+          "values": [
+            "vmware-inv"
+          ]
+        },
+        "title": "VMware Datastore logs",
+        "type": "events"
+      },
+      {
+        "entity_field_filter": {
+          "data_field": "objectId",
+          "entity_field": "moid",
+          "type": "entity"
+        },
+        "static_filter": {
+          "filters": [
+            {
+              "field": "index",
+              "type": "include",
+              "values": [
+                "vmware-taskevent"
+              ]
+            },
+            {
+              "field": "sourcetype",
+              "type": "include",
+              "values": [
+                "vmware_inframon:events"
+              ]
+            },
+            {
+              "field": "objectType",
+              "type": "include",
+              "values": [
+                "Datastore"
+              ]
+            }
+          ],
+          "type": "and"
+        },
+        "title": "VMware Datastore Events logs",
+        "type": "events"
+      }
+    ],
+    "description": "VMware datastore type",
+    "identifying_name": "vmware datastore",
+    "mod_source": "ITSI default import",
+    "mod_timestamp": "2025-08-26T00:41:33.800785+00:00",
+    "object_type": "entity_type",
+    "title": "VMware Datastore",
+    "vital_metrics": [
+      {
+        "is_key": 1,
+        "matching_entity_fields": [
+          "itsi_entity_id"
+        ],
+        "metric_name": "Average Datastore Usage",
+        "search": "| mstats avg(vsphere.datastore.used_percent) as val WHERE `itsi_entity_type_vmware_datastore_metrics_indexes` by moid,vcenter span=10m | eval itsi_entity_id=moid.\"_\".vcenter",
+        "split_by_fields": [
+          "itsi_entity_id"
+        ],
+        "unit": "%"
+      },
+      {
+        "is_key": 0,
+        "matching_entity_fields": [
+          "itsi_entity_id"
+        ],
+        "metric_name": "Datastore Overprovisioned",
+        "search": "| mstats avg(vsphere.datastore.freespace) as freespace, avg(vsphere.datastore.capacity) as capacity, avg(vsphere.datastore.uncommitted) as uncommitted WHERE `itsi_entity_type_vmware_datastore_metrics_indexes` by moid,vcenter span=5m | eval itsi_entity_id=moid.\"_\".vcenter |eval provisioned = (capacity-freespace+uncommitted) | eval overprovisioned_pct = (provisioned/capacity-1)*100 | eval val=overprovisioned_pct",
+        "split_by_fields": [
+          "itsi_entity_id"
+        ],
+        "unit": "%"
+      },
+      {
+        "is_key": 0,
+        "matching_entity_fields": [
+          "itsi_entity_id"
+        ],
+        "metric_name": "Average Datastore Read Latency",
+        "search": "| mstats avg(vsphere.esxihost.datastore.totalReadLatency) as val WHERE `itsi_entity_type_vmware_datastore_metrics_indexes` by datastore, vcenter span=5m | eval itsi_entity_id=datastore.\"_\".vcenter",
+        "split_by_fields": [
+          "itsi_entity_id"
+        ],
+        "unit": "ms"
+      },
+      {
+        "is_key": 0,
+        "matching_entity_fields": [
+          "itsi_entity_id"
+        ],
+        "metric_name": "Average Datastore Write Latency",
+        "search": "| mstats avg(vsphere.esxihost.datastore.totalWriteLatency) as val WHERE `itsi_entity_type_vmware_datastore_metrics_indexes` by datastore, vcenter span=5m | eval itsi_entity_id=datastore.\"_\".vcenter",
+        "split_by_fields": [
+          "itsi_entity_id"
+        ],
+        "unit": "ms"
+      }
+    ]
+  },
+  {
+    "_is_from_conf": 1,
+    "_key": "vmware_esxi_host",
+    "_user": "nobody",
+    "_version": "4.20.1",
+    "dashboard_drilldowns": [
+      {
+        "base_url": "",
+        "dashboard_type": "udf_dashboard",
+        "id": "vmware_esxi_overview_dashboard",
+        "params": {
+          "alias_param_map": [
+            {
+              "alias": "ds_sources-name",
+              "ds_source": "ITSI Import Objects - VMware Host",
+              "param": "title"
+            }
+          ],
+          "static_params": {}
+        },
+        "title": "VMware ESXi Overview Dashboard"
+      }
+    ],
+    "data_drilldowns": [
+      {
+        "entity_field_filter": {
+          "data_field": "uuid",
+          "entity_field": "uuid",
+          "type": "entity"
+        },
+        "static_filter": {
+          "field": "metric_name",
+          "type": "include",
+          "values": [
+            "vsphere.esxihost.*"
+          ]
+        },
+        "title": "VMware ESXi metrics",
+        "type": "metrics"
+      },
+      {
+        "entity_field_filter": {
+          "data_field": "moid",
+          "entity_field": "moid",
+          "type": "entity"
+        },
+        "static_filter": {
+          "field": "index",
+          "type": "include",
+          "values": [
+            "vmware-inv"
+          ]
+        },
+        "title": "VMware Inventory logs",
+        "type": "events"
+      },
+      {
+        "entity_field_filter": {
+          "data_field": "entity.moid",
+          "entity_field": "moid",
+          "type": "entity"
+        },
+        "static_filter": {
+          "filters": [
+            {
+              "field": "index",
+              "type": "include",
+              "values": [
+                "vmware-taskevent"
+              ]
+            },
+            {
+              "field": "sourcetype",
+              "type": "include",
+              "values": [
+                "vmware_inframon:tasks"
+              ]
+            }
+          ],
+          "type": "and"
+        },
+        "title": "VMware Tasks logs",
+        "type": "events"
+      },
+      {
+        "entity_field_filter": {
+          "data_field": "host.host.moid",
+          "entity_field": "moid",
+          "type": "entity"
+        },
+        "static_filter": {
+          "filters": [
+            {
+              "field": "index",
+              "type": "include",
+              "values": [
+                "vmware-taskevent"
+              ]
+            },
+            {
+              "field": "sourcetype",
+              "type": "include",
+              "values": [
+                "vmware_inframon:events"
+              ]
+            },
+            {
+              "field": "host.host.type",
+              "type": "include",
+              "values": [
+                "HostSystem"
+              ]
+            }
+          ],
+          "type": "and"
+        },
+        "title": "VMware ESXi Hosts Events logs",
+        "type": "events"
+      },
+      {
+        "entity_field_filter": {
+          "data_field": "host",
+          "entity_field": "name",
+          "type": "entity"
+        },
+        "static_filter": {
+          "field": "index",
+          "type": "include",
+          "values": [
+            "vmware-esxilog"
+          ]
+        },
+        "title": "VMware ESXi logs",
+        "type": "events"
+      }
+    ],
+    "description": "VMware ESXi Host type",
+    "identifying_name": "vmware esxi host",
+    "mod_source": "ITSI default import",
+    "mod_timestamp": "2025-08-26T00:41:34.042230+00:00",
+    "object_type": "entity_type",
+    "title": "VMware ESXi Host",
+    "vital_metrics": [
+      {
+        "is_key": 1,
+        "matching_entity_fields": [
+          "uuid"
+        ],
+        "metric_name": "Average CPU Usage",
+        "search": "| mstats avg(vsphere.esxihost.cpu.usage) as val WHERE `itsi_entity_type_vmware_esxihost_metrics_indexes` by uuid span=5m",
+        "split_by_fields": [
+          "uuid"
+        ],
+        "unit": "%"
+      },
+      {
+        "is_key": 0,
+        "matching_entity_fields": [
+          "uuid"
+        ],
+        "metric_name": "Average Memory Usage",
+        "search": "| mstats avg(vsphere.esxihost.mem.consumed) as val WHERE `itsi_entity_type_vmware_esxihost_metrics_indexes` by uuid span=5m",
+        "split_by_fields": [
+          "uuid"
+        ],
+        "unit": "KB"
+      },
+      {
+        "is_key": 0,
+        "matching_entity_fields": [
+          "uuid"
+        ],
+        "metric_name": "Average Datastore Latency",
+        "search": "| mstats avg(vsphere.esxihost.datastore.totalReadLatency) as rl,avg(vsphere.esxihost.datastore.totalWriteLatency) as wl WHERE `itsi_entity_type_vmware_esxihost_metrics_indexes` by uuid span=5m | eval val=(rl+wl)/2 ",
+        "split_by_fields": [
+          "uuid"
+        ],
+        "unit": "ms"
+      },
+      {
+        "is_key": 0,
+        "matching_entity_fields": [
+          "uuid"
+        ],
+        "metric_name": "Average Network Traffic",
+        "search": "| mstats avg(vsphere.esxihost.net.transmitted) as tx,avg(vsphere.esxihost.net.received) as rx WHERE `itsi_entity_type_vmware_esxihost_metrics_indexes` by uuid span=5m | eval val=round((tx+rx)/2/1024,2)",
+        "split_by_fields": [
+          "uuid"
+        ],
+        "unit": "MB/s"
+      }
+    ]
+  },
+  {
+    "_is_from_conf": 1,
+    "_key": "vmware_vcenter",
+    "_user": "nobody",
+    "_version": "4.20.1",
+    "dashboard_drilldowns": [
+      {
+        "base_url": "",
+        "dashboard_type": "udf_dashboard",
+        "id": "vmware_vcenter_overview_dashboard",
+        "params": {
+          "alias_param_map": [
+            {
+              "alias": "ds_sources-vcenter",
+              "ds_source": "ITSI Import Objects - VMware vCenter",
+              "param": "title"
+            }
+          ],
+          "static_params": {}
+        },
+        "title": "VMware vCenter Overview Dashboard"
+      }
+    ],
+    "data_drilldowns": [
+      {
+        "entity_field_filter": {
+          "data_field": "vcenter",
+          "entity_field": "vcenter",
+          "type": "entity"
+        },
+        "static_filter": {
+          "field": "metric_name",
+          "type": "include",
+          "values": [
+            "vsphere.*"
+          ]
+        },
+        "title": "VMware vCenter metrics",
+        "type": "metrics"
+      },
+      {
+        "entity_field_filter": {
+          "data_field": "host",
+          "entity_field": "vcenter",
+          "type": "entity"
+        },
+        "static_filter": {
+          "field": "index",
+          "type": "include",
+          "values": [
+            "vmware-inv"
+          ]
+        },
+        "title": "VMware Inventory logs",
+        "type": "events"
+      },
+      {
+        "entity_field_filter": {
+          "data_field": "host",
+          "entity_field": "vcenter",
+          "type": "entity"
+        },
+        "static_filter": {
+          "field": "index",
+          "type": "include",
+          "values": [
+            "vmware-taskevent"
+          ]
+        },
+        "title": "VMware vCenter Tasks and Events logs",
+        "type": "events"
+      },
+      {
+        "entity_field_filter": {
+          "data_field": "host",
+          "entity_field": "vcenter",
+          "type": "entity"
+        },
+        "static_filter": {
+          "field": "index",
+          "type": "include",
+          "values": [
+            "vmware-vclog"
+          ]
+        },
+        "title": "VMware vCenter logs",
+        "type": "events"
+      }
+    ],
+    "description": "VMware vCenter type",
+    "identifying_name": "vmware vcenter",
+    "mod_source": "ITSI default import",
+    "mod_timestamp": "2025-08-26T00:41:34.265992+00:00",
+    "object_type": "entity_type",
+    "title": "VMware vCenter",
+    "vital_metrics": [
+      {
+        "is_key": 1,
+        "matching_entity_fields": [
+          "vcenter"
+        ],
+        "metric_name": "Average CPU Usage",
+        "search": "| mstats avg(vsphere.vc.vcResources.systemcpuusage) as val WHERE `itsi_entity_type_vmware_vcenter_metrics_indexes` by vcenter span=5m",
+        "split_by_fields": [
+          "vcenter"
+        ],
+        "unit": "%"
+      },
+      {
+        "is_key": 0,
+        "matching_entity_fields": [
+          "vcenter"
+        ],
+        "metric_name": "Average Physical Memory Usage",
+        "search": "| mstats avg(vsphere.vc.vcResources.physicalmemusage) as val WHERE `itsi_entity_type_vmware_vcenter_metrics_indexes` by vcenter span=5m",
+        "split_by_fields": [
+          "vcenter"
+        ],
+        "unit": "KB"
+      },
+      {
+        "is_key": 0,
+        "matching_entity_fields": [
+          "vcenter"
+        ],
+        "metric_name": "Average Virtual Memory Usage",
+        "search": "| mstats avg(vsphere.vc.vcResources.virtualmemusage) as val WHERE `itsi_entity_type_vmware_vcenter_metrics_indexes` by vcenter span=5m",
+        "split_by_fields": [
+          "vcenter"
+        ],
+        "unit": "KB"
+      },
+      {
+        "is_key": 0,
+        "matching_entity_fields": [
+          "vcenter"
+        ],
+        "metric_name": "VCSA Failures",
+        "search": "search index=vmware-vclog sourcetype=vmware:vclog:vpxd host=* error | bin span=5m _time | stats count as val by host, _time",
+        "split_by_fields": [
+          "host"
+        ],
+        "unit": ""
+      }
+    ]
+  },
+  {
+    "_is_from_conf": 1,
+    "_key": "vmware_vm",
+    "_user": "nobody",
+    "_version": "4.20.1",
+    "dashboard_drilldowns": [
+      {
+        "base_url": "",
+        "dashboard_type": "udf_dashboard",
+        "id": "vmware_vm_overview_dashboard",
+        "params": {
+          "alias_param_map": [
+            {
+              "alias": "ds_sources-name",
+              "ds_source": "ITSI Import Objects - VMware VM",
+              "param": "title"
+            }
+          ],
+          "static_params": {}
+        },
+        "title": "VMware VM Overview Dashboard"
+      }
+    ],
+    "data_drilldowns": [
+      {
+        "entity_field_filter": {
+          "data_field": "uuid",
+          "entity_field": "uuid",
+          "type": "entity"
+        },
+        "static_filter": {
+          "field": "metric_name",
+          "type": "include",
+          "values": [
+            "vsphere.vm.*"
+          ]
+        },
+        "title": "VMware VM metrics",
+        "type": "metrics"
+      },
+      {
+        "entity_field_filter": {
+          "data_field": "moid",
+          "entity_field": "moid",
+          "type": "entity"
+        },
+        "static_filter": {
+          "field": "index",
+          "type": "include",
+          "values": [
+            "vmware-inv"
+          ]
+        },
+        "title": "VMware Inventory logs",
+        "type": "events"
+      },
+      {
+        "entity_field_filter": {
+          "data_field": "entity.moid",
+          "entity_field": "moid",
+          "type": "entity"
+        },
+        "static_filter": {
+          "filters": [
+            {
+              "field": "index",
+              "type": "include",
+              "values": [
+                "vmware-taskevent"
+              ]
+            },
+            {
+              "field": "sourcetype",
+              "type": "include",
+              "values": [
+                "vmware_inframon:tasks"
+              ]
+            }
+          ],
+          "type": "and"
+        },
+        "title": "VMware Tasks logs",
+        "type": "events"
+      },
+      {
+        "entity_field_filter": {
+          "data_field": "entity.entity.moid",
+          "entity_field": "moid",
+          "type": "entity"
+        },
+        "static_filter": {
+          "filters": [
+            {
+              "field": "index",
+              "type": "include",
+              "values": [
+                "vmware-taskevent"
+              ]
+            },
+            {
+              "field": "sourcetype",
+              "type": "include",
+              "values": [
+                "vmware_inframon:events"
+              ]
+            }
+          ],
+          "type": "and"
+        },
+        "title": "VMware Events logs",
+        "type": "events"
+      }
+    ],
+    "description": "VMware VM type",
+    "identifying_name": "vmware vm",
+    "mod_source": "ITSI default import",
+    "mod_timestamp": "2025-08-26T00:41:34.496324+00:00",
+    "object_type": "entity_type",
+    "title": "VMware VM",
+    "vital_metrics": [
+      {
+        "is_key": 1,
+        "matching_entity_fields": [
+          "uuid"
+        ],
+        "metric_name": "Average CPU Usage",
+        "search": "| mstats avg(vsphere.vm.cpu.usage) as val WHERE `itsi_entity_type_vmware_vm_metrics_indexes` by uuid span=5m",
+        "split_by_fields": [
+          "uuid"
+        ],
+        "unit": "%"
+      },
+      {
+        "is_key": 0,
+        "matching_entity_fields": [
+          "uuid"
+        ],
+        "metric_name": "Average Memory Usage",
+        "search": "| mstats avg(vsphere.vm.mem.usage) as val WHERE `itsi_entity_type_vmware_vm_metrics_indexes` by uuid span=5m",
+        "split_by_fields": [
+          "uuid"
+        ],
+        "unit": "%"
+      },
+      {
+        "is_key": 0,
+        "matching_entity_fields": [
+          "uuid"
+        ],
+        "metric_name": "Average Datastore Latency",
+        "search": "| mstats avg(vsphere.vm.datastore.totalReadLatency) as rl,avg(vsphere.vm.datastore.totalWriteLatency) as wl WHERE `itsi_entity_type_vmware_vm_metrics_indexes` by uuid span=5m | eval val= (rl+wl)/2 ",
+        "split_by_fields": [
+          "uuid"
+        ],
+        "unit": "ms"
+      },
+      {
+        "is_key": 0,
+        "matching_entity_fields": [
+          "uuid"
+        ],
+        "metric_name": "Average Network Usage",
+        "search": "| mstats avg(vsphere.vm.net.transmitted) as tx,avg(vsphere.vm.net.received) as rx WHERE `itsi_entity_type_vmware_vm_metrics_indexes` by uuid span=5m | eval val= (tx+rx)/2 ",
+        "split_by_fields": [
+          "uuid"
+        ],
+        "unit": "KB/s"
+      }
+    ]
+  },
+  {
+    "_is_from_conf": 1,
+    "_key": "windows",
+    "_user": "nobody",
+    "_version": "4.20.1",
+    "dashboard_drilldowns": [
+      {
+        "base_url": "",
+        "dashboard_type": "udf_dashboard",
+        "id": "windows_overview_dashboard",
+        "params": {
+          "alias_param_map": [
+            {
+              "alias": "ds_sources-host",
+              "ds_source": "ITSI Import Objects - Perfmon",
+              "param": "title"
+            }
+          ],
+          "static_params": {}
+        },
+        "title": "Windows Overview Dashboard"
+      },
+      {
+        "base_url": "",
+        "dashboard_type": "xml_dashboard",
+        "id": "windows_applicationcrashes",
+        "params": {
+          "alias_param_map": [],
+          "static_params": {}
+        },
+        "title": "Application Crashes - Windows"
+      },
+      {
+        "base_url": "",
+        "dashboard_type": "xml_dashboard",
+        "id": "windows_applicationinstalls",
+        "params": {
+          "alias_param_map": [],
+          "static_params": {}
+        },
+        "title": "Application Installs - Windows"
+      },
+      {
+        "base_url": "",
+        "dashboard_type": "xml_dashboard",
+        "id": "windows_event",
+        "params": {
+          "alias_param_map": [],
+          "static_params": {}
+        },
+        "title": "Event Monitoring - Windows"
+      },
+      {
+        "base_url": "",
+        "dashboard_type": "xml_dashboard",
+        "id": "host_information",
+        "params": {
+          "alias_param_map": [],
+          "static_params": {}
+        },
+        "title": "Host Information - Windows"
+      },
+      {
+        "base_url": "",
+        "dashboard_type": "xml_dashboard",
+        "id": "windows_networkmonitoring",
+        "params": {
+          "alias_param_map": [],
+          "static_params": {}
+        },
+        "title": "Network Activity - Windows"
+      },
+      {
+        "base_url": "",
+        "dashboard_type": "xml_dashboard",
+        "id": "windows_processes",
+        "params": {
+          "alias_param_map": [],
+          "static_params": {}
+        },
+        "title": "Processes - Windows"
+      },
+      {
+        "base_url": "",
+        "dashboard_type": "xml_dashboard",
+        "id": "windows_services",
+        "params": {
+          "alias_param_map": [],
+          "static_params": {}
+        },
+        "title": "Services - Windows"
+      },
+      {
+        "base_url": "",
+        "dashboard_type": "xml_dashboard",
+        "id": "windows_windowsupdate",
+        "params": {
+          "alias_param_map": [],
+          "static_params": {}
+        },
+        "title": "Windows Update - Windows"
+      }
+    ],
+    "data_drilldowns": [
+      {
+        "entity_field_filter": {
+          "data_field": "host",
+          "entity_field": "host",
+          "type": "entity"
+        },
+        "static_filter": {
+          "field": "metric_name",
+          "type": "include",
+          "values": [
+            "*"
+          ]
+        },
+        "title": "System metrics",
+        "type": "metrics"
+      },
+      {
+        "entity_field_filter": {
+          "data_field": "host",
+          "entity_field": "host",
+          "type": "entity"
+        },
+        "static_filter": {
+          "field": "sourcetype",
+          "type": "include",
+          "values": [
+            "*"
+          ]
+        },
+        "title": "Windows logs",
+        "type": "events"
+      }
+    ],
+    "description": "Windows type",
+    "identifying_name": "windows",
+    "mod_source": "ITSI default import",
+    "mod_timestamp": "2025-08-26T00:41:34.767029+00:00",
+    "object_type": "entity_type",
+    "title": "Windows",
+    "vital_metrics": [
+      {
+        "is_key": 1,
+        "matching_entity_fields": [
+          "host"
+        ],
+        "metric_name": "CPU Utilization",
+        "search": "| mstats min(Processor.%_Idle_Time) as val WHERE `itsi_entity_type_windows_metrics_indexes` instance=\"_Total\" by host span=1m | eval val=100-val",
+        "split_by_fields": [
+          "host"
+        ],
+        "unit": "%"
+      },
+      {
+        "is_key": 0,
+        "matching_entity_fields": [
+          "host"
+        ],
+        "metric_name": "Memory Utilization",
+        "search": "| mstats max(Memory.%_Committed_Bytes_In_Use) as val WHERE `itsi_entity_type_windows_metrics_indexes` by host span=1m",
+        "split_by_fields": [
+          "host"
+        ],
+        "unit": "%"
+      },
+      {
+        "is_key": 0,
+        "matching_entity_fields": [
+          "host"
+        ],
+        "metric_name": "Disk Utilization",
+        "search": "| mstats min(LogicalDisk.%_Free_Space) as val WHERE `itsi_entity_type_windows_metrics_indexes` AND NOT instance=\"_Total\" AND instance=\"*\" by host span=1m | eval val=100-val",
+        "split_by_fields": [
+          "host"
+        ],
+        "unit": "%"
+      },
+      {
+        "is_key": 0,
+        "matching_entity_fields": [
+          "host"
+        ],
+        "metric_name": "Average Network Usage",
+        "search": "| mstats avg(Network_Interface.Bytes_Sent/sec) as tx,avg(Network_Interface.Bytes_Received/sec) as rx WHERE `itsi_entity_type_windows_metrics_indexes` by host span=5m | eval val=round((tx+rx)/2/1024,2) ",
+        "split_by_fields": [
+          "host"
+        ],
+        "unit": "KB/s"
+      }
+    ]
+  }
+]

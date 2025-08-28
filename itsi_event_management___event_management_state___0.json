@@ -1,1 +1,80 @@
-[{"title": "Episode Review", "description": "", "mod_time": "", "acl": {"can_change_perms": true, "can_share_app": true, "can_share_global": true, "can_share_user": true, "can_write": true, "modifiable": true, "owner": "admin", "perms": {"read": ["*"], "write": ["*"]}, "sharing": "app"}, "_owner": "nobody", "source_itsi_da": "itsi", "earliest": "-24h", "latest": "now", "fetchLimit": 50, "sortField": "_time", "sortDirection": "-", "arbitrarySearch": "", "eventFieldFilter": {}, "filterCollection": [], "viewingOption": "standard", "wrapTextTableContent": false, "eventDeduplication": true, "eventDeduplicationField": "event_identifier_hash", "columnsShown": [{"value": "_duplicate_count"}, {"value": "title"}, {"value": "_time"}, {"value": "owner"}, {"value": "severity_label"}, {"value": "status"}, {"value": "description"}], "showSummaryDashboard": true, "autoRefresh": 0, "dashboard": "{\"dataSources\":{\"mttrSearch\":{\"options\":{\"query\":\"| `itsi_event_management_get_mean_time(resolved)`\",\"queryParameters\":{\"earliest\":\"$earliest_time$\",\"latest\":\"$latest_time$\"}},\"type\":\"ds.search\"},\"episodesBySeveritySearch\":{\"options\":{\"query\":\"|`itsi_event_management_episode_by_severity`\",\"queryParameters\":{\"earliest\":\"$earliest_time$\",\"latest\":\"$latest_time$\"}},\"type\":\"ds.search\"},\"noiseReductionSearch\":{\"options\":{\"query\":\"| `itsi_event_management_noise_reduction`\",\"queryParameters\":{\"earliest\":\"$earliest_time$\",\"latest\":\"$latest_time$\"}},\"type\":\"ds.search\"},\"percentAckSearch\":{\"options\":{\"query\":\"| `itsi_event_management_get_episode_count(acknowledged)` | eval acknowledgedPercent=(Acknowledged/total)*100 | table acknowledgedPercent\",\"queryParameters\":{\"earliest\":\"$earliest_time$\",\"latest\":\"$latest_time$\"}},\"type\":\"ds.search\"},\"mttaSearch\":{\"options\":{\"query\":\"| `itsi_event_management_get_mean_time(acknowledged)`\",\"queryParameters\":{\"earliest\":\"$earliest_time$\",\"latest\":\"$latest_time$\"}},\"type\":\"ds.search\"}},\"visualizations\":{\"mttr\":{\"title\":\"Mean Time to Resolve\",\"type\":\"splunk.singlevalue\",\"options\":{\"backgroundColor\":\"#ffffff\",\"sparklineDisplay\":\"off\",\"trendDisplay\":\"off\",\"trendValue\":0,\"unit\":\"minutes\"},\"dataSources\":{\"primary\":\"mttrSearch\"}},\"episodesBySeverity\":{\"title\":\"Episodes by Severity\",\"type\":\"splunk.bar\",\"options\":{\"backgroundColor\":\"#ffffff\",\"barSpacing\":5,\"dataValuesDisplay\":\"all\",\"legendDisplay\":\"off\",\"showYMajorGridLines\":false,\"yAxisLabelVisibility\":\"hide\",\"xAxisMajorTickVisibility\":\"hide\",\"yAxisMajorTickVisibility\":\"hide\",\"xAxisTitleVisibility\":\"hide\",\"yAxisTitleVisibility\":\"hide\"},\"dataSources\":{\"primary\":\"episodesBySeveritySearch\"}},\"noiseReduction\":{\"title\":\"Total Noise Reduction\",\"type\":\"splunk.singlevalue\",\"options\":{\"backgroundColor\":\"> majorValue | rangeValue(backgroundColorThresholds)\",\"numberPrecision\":2,\"sparklineDisplay\":\"off\",\"trendDisplay\":\"off\",\"trendValue\":0,\"unit\":\"%\"},\"context\":{\"backgroundColorThresholds\":[{\"from\":95,\"value\":\"#65a637\"},{\"from\":90,\"to\":95,\"value\":\"#6db7c6\"},{\"from\":87,\"to\":90,\"value\":\"#f7bc38\"},{\"from\":85,\"to\":87,\"value\":\"#f58f39\"},{\"to\":85,\"value\":\"#d93f3c\"}]},\"dataSources\":{\"primary\":\"noiseReductionSearch\"}},\"percentAck\":{\"title\":\"Episodes Acknowledged\",\"type\":\"splunk.singlevalue\",\"options\":{\"backgroundColor\":\"#ffffff\",\"numberPrecision\":2,\"sparklineDisplay\":\"off\",\"trendDisplay\":\"off\",\"trendValue\":0,\"unit\":\"%\"},\"dataSources\":{\"primary\":\"percentAckSearch\"}},\"mtta\":{\"title\":\"Mean Time to Acknowledged\",\"type\":\"splunk.singlevalue\",\"options\":{\"backgroundColor\":\"#ffffff\",\"sparklineDisplay\":\"off\",\"trendDisplay\":\"off\",\"trendValue\":0,\"unit\":\"minutes\"},\"dataSources\":{\"primary\":\"mttaSearch\"}}},\"layout\":{\"type\":\"grid\",\"options\":{\"display\":\"auto-scale\",\"height\":240,\"width\":1440},\"structure\":[{\"item\":\"mttr\",\"type\":\"block\",\"position\":{\"x\":0,\"y\":0,\"w\":288,\"h\":220}},{\"item\":\"episodesBySeverity\",\"type\":\"block\",\"position\":{\"x\":288,\"y\":0,\"w\":288,\"h\":220}},{\"item\":\"noiseReduction\",\"type\":\"block\",\"position\":{\"x\":576,\"y\":0,\"w\":288,\"h\":220}},{\"item\":\"percentAck\",\"type\":\"block\",\"position\":{\"x\":864,\"y\":0,\"w\":288,\"h\":220}},{\"item\":\"mtta\",\"type\":\"block\",\"position\":{\"x\":1152,\"y\":0,\"w\":288,\"h\":220}}]}}", "timeFormat": "%m/%d/%Y %I:%M:%S %p", "configuredTabId": "impact", "canViewAllFilters": true, "showEventFieldFilter": false, "episodesSelectedCount": 0, "episodeEventsGroupByFields": [], "episodeEventsColumnFiltersMap": {}, "mod_source": "unknown", "object_type": "event_management_state", "mod_timestamp": "2025-07-30T05:03:58.862838+00:00", "_version": "4.20.1", "identifying_name": "episode review", "interactable": true, "_user": "nobody", "_key": "e35b6f7c-6d01-11f0-a802-000c295d5262"}]
+[
+  {
+    "_key": "e35b6f7c-6d01-11f0-a802-000c295d5262",
+    "_owner": "nobody",
+    "_user": "nobody",
+    "_version": "4.20.1",
+    "acl": {
+      "can_change_perms": true,
+      "can_share_app": true,
+      "can_share_global": true,
+      "can_share_user": true,
+      "can_write": true,
+      "modifiable": true,
+      "owner": "admin",
+      "perms": {
+        "read": [
+          "*"
+        ],
+        "write": [
+          "*"
+        ]
+      },
+      "sharing": "app"
+    },
+    "arbitrarySearch": "",
+    "autoRefresh": 0,
+    "canViewAllFilters": true,
+    "columnsShown": [
+      {
+        "value": "_duplicate_count"
+      },
+      {
+        "value": "title"
+      },
+      {
+        "value": "_time"
+      },
+      {
+        "value": "owner"
+      },
+      {
+        "value": "severity_label"
+      },
+      {
+        "value": "status"
+      },
+      {
+        "value": "description"
+      }
+    ],
+    "configuredTabId": "impact",
+    "dashboard": "{\"dataSources\":{\"mttrSearch\":{\"options\":{\"query\":\"| `itsi_event_management_get_mean_time(resolved)`\",\"queryParameters\":{\"earliest\":\"$earliest_time$\",\"latest\":\"$latest_time$\"}},\"type\":\"ds.search\"},\"episodesBySeveritySearch\":{\"options\":{\"query\":\"|`itsi_event_management_episode_by_severity`\",\"queryParameters\":{\"earliest\":\"$earliest_time$\",\"latest\":\"$latest_time$\"}},\"type\":\"ds.search\"},\"noiseReductionSearch\":{\"options\":{\"query\":\"| `itsi_event_management_noise_reduction`\",\"queryParameters\":{\"earliest\":\"$earliest_time$\",\"latest\":\"$latest_time$\"}},\"type\":\"ds.search\"},\"percentAckSearch\":{\"options\":{\"query\":\"| `itsi_event_management_get_episode_count(acknowledged)` | eval acknowledgedPercent=(Acknowledged/total)*100 | table acknowledgedPercent\",\"queryParameters\":{\"earliest\":\"$earliest_time$\",\"latest\":\"$latest_time$\"}},\"type\":\"ds.search\"},\"mttaSearch\":{\"options\":{\"query\":\"| `itsi_event_management_get_mean_time(acknowledged)`\",\"queryParameters\":{\"earliest\":\"$earliest_time$\",\"latest\":\"$latest_time$\"}},\"type\":\"ds.search\"}},\"visualizations\":{\"mttr\":{\"title\":\"Mean Time to Resolve\",\"type\":\"splunk.singlevalue\",\"options\":{\"backgroundColor\":\"#ffffff\",\"sparklineDisplay\":\"off\",\"trendDisplay\":\"off\",\"trendValue\":0,\"unit\":\"minutes\"},\"dataSources\":{\"primary\":\"mttrSearch\"}},\"episodesBySeverity\":{\"title\":\"Episodes by Severity\",\"type\":\"splunk.bar\",\"options\":{\"backgroundColor\":\"#ffffff\",\"barSpacing\":5,\"dataValuesDisplay\":\"all\",\"legendDisplay\":\"off\",\"showYMajorGridLines\":false,\"yAxisLabelVisibility\":\"hide\",\"xAxisMajorTickVisibility\":\"hide\",\"yAxisMajorTickVisibility\":\"hide\",\"xAxisTitleVisibility\":\"hide\",\"yAxisTitleVisibility\":\"hide\"},\"dataSources\":{\"primary\":\"episodesBySeveritySearch\"}},\"noiseReduction\":{\"title\":\"Total Noise Reduction\",\"type\":\"splunk.singlevalue\",\"options\":{\"backgroundColor\":\"> majorValue | rangeValue(backgroundColorThresholds)\",\"numberPrecision\":2,\"sparklineDisplay\":\"off\",\"trendDisplay\":\"off\",\"trendValue\":0,\"unit\":\"%\"},\"context\":{\"backgroundColorThresholds\":[{\"from\":95,\"value\":\"#65a637\"},{\"from\":90,\"to\":95,\"value\":\"#6db7c6\"},{\"from\":87,\"to\":90,\"value\":\"#f7bc38\"},{\"from\":85,\"to\":87,\"value\":\"#f58f39\"},{\"to\":85,\"value\":\"#d93f3c\"}]},\"dataSources\":{\"primary\":\"noiseReductionSearch\"}},\"percentAck\":{\"title\":\"Episodes Acknowledged\",\"type\":\"splunk.singlevalue\",\"options\":{\"backgroundColor\":\"#ffffff\",\"numberPrecision\":2,\"sparklineDisplay\":\"off\",\"trendDisplay\":\"off\",\"trendValue\":0,\"unit\":\"%\"},\"dataSources\":{\"primary\":\"percentAckSearch\"}},\"mtta\":{\"title\":\"Mean Time to Acknowledged\",\"type\":\"splunk.singlevalue\",\"options\":{\"backgroundColor\":\"#ffffff\",\"sparklineDisplay\":\"off\",\"trendDisplay\":\"off\",\"trendValue\":0,\"unit\":\"minutes\"},\"dataSources\":{\"primary\":\"mttaSearch\"}}},\"layout\":{\"type\":\"grid\",\"options\":{\"display\":\"auto-scale\",\"height\":240,\"width\":1440},\"structure\":[{\"item\":\"mttr\",\"type\":\"block\",\"position\":{\"x\":0,\"y\":0,\"w\":288,\"h\":220}},{\"item\":\"episodesBySeverity\",\"type\":\"block\",\"position\":{\"x\":288,\"y\":0,\"w\":288,\"h\":220}},{\"item\":\"noiseReduction\",\"type\":\"block\",\"position\":{\"x\":576,\"y\":0,\"w\":288,\"h\":220}},{\"item\":\"percentAck\",\"type\":\"block\",\"position\":{\"x\":864,\"y\":0,\"w\":288,\"h\":220}},{\"item\":\"mtta\",\"type\":\"block\",\"position\":{\"x\":1152,\"y\":0,\"w\":288,\"h\":220}}]}}",
+    "description": "",
+    "earliest": "-24h",
+    "episodeEventsColumnFiltersMap": {},
+    "episodeEventsGroupByFields": [],
+    "episodesSelectedCount": 0,
+    "eventDeduplication": true,
+    "eventDeduplicationField": "event_identifier_hash",
+    "eventFieldFilter": {},
+    "fetchLimit": 50,
+    "filterCollection": [],
+    "identifying_name": "episode review",
+    "interactable": true,
+    "latest": "now",
+    "mod_source": "unknown",
+    "mod_time": "",
+    "mod_timestamp": "2025-07-30T05:03:58.862838+00:00",
+    "object_type": "event_management_state",
+    "showEventFieldFilter": false,
+    "showSummaryDashboard": true,
+    "sortDirection": "-",
+    "sortField": "_time",
+    "source_itsi_da": "itsi",
+    "timeFormat": "%m/%d/%Y %I:%M:%S %p",
+    "title": "Episode Review",
+    "viewingOption": "standard",
+    "wrapTextTableContent": false
+  }
+]

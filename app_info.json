@@ -1,1 +1,4 @@
-{"itsi_version": "4.20.1", "backup_host": "localhost.localdomain"}
+{
+  "backup_host": "localhost.localdomain",
+  "itsi_version": "4.20.1"
+}

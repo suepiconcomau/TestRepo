@@ -1,1 +1,62 @@
-[{"backup_history": [{"search_head_id": "50A477EC-F6E6-4A05-B081-C0333275E51A", "create_time": 1756309179.9750607, "file_name": "ItsiDefaultScheduledBackup-1756309179"}, {"search_head_id": "50A477EC-F6E6-4A05-B081-C0333275E51A", "create_time": 1756222779.253913, "file_name": "ItsiDefaultScheduledBackup-1756222779"}, {"search_head_id": "50A477EC-F6E6-4A05-B081-C0333275E51A", "create_time": 1756165475.9556792, "file_name": "ItsiDefaultScheduledBackup-1756165475"}, {"search_head_id": "50A477EC-F6E6-4A05-B081-C0333275E51A", "create_time": 1756048022.2126138, "file_name": "ItsiDefaultScheduledBackup-1756048022"}, {"search_head_id": "50A477EC-F6E6-4A05-B081-C0333275E51A", "create_time": 1755961624.5497236, "file_name": "ItsiDefaultScheduledBackup-1755961624"}, {"search_head_id": "50A477EC-F6E6-4A05-B081-C0333275E51A", "create_time": 1755878824.2297482, "file_name": "ItsiDefaultScheduledBackup-1755878824"}, {"search_head_id": "50A477EC-F6E6-4A05-B081-C0333275E51A", "create_time": 1755875225.427202, "file_name": "ItsiDefaultScheduledBackup-1755875225"}, {"search_head_id": "50A477EC-F6E6-4A05-B081-C0333275E51A", "create_time": 1755788823.9351046, "file_name": "ItsiDefaultScheduledBackup-1755788823"}], "mod_source": "unknown", "object_type": "backup_restore", "status": "Scheduled Daily", "scheduled_time": 1756393200.215205, "last_error": "None", "start_time": 1756309179.9750607, "end_time": 1756309195.59467, "search_head_id": "50A477EC-F6E6-4A05-B081-C0333275E51A", "title": "Default Scheduled Backup", "job_type": "Backup", "scheduled": 1, "include_conf_files": 1, "frequency": "daily", "_owner": "nobody", "enabled": 1, "keep_max_time": 604800, "mod_timestamp": "2025-08-28T03:56:40.171243+00:00", "_version": "4.20.1", "identifying_name": "default scheduled backup", "_user": "nobody", "_key": "ItsiDefaultScheduledBackup"}]
+[
+  {
+    "_key": "ItsiDefaultScheduledBackup",
+    "_owner": "nobody",
+    "_user": "nobody",
+    "_version": "4.20.1",
+    "backup_history": [
+      {
+        "create_time": 1756309179.9750607,
+        "file_name": "ItsiDefaultScheduledBackup-1756309179",
+        "search_head_id": "50A477EC-F6E6-4A05-B081-C0333275E51A"
+      },
+      {
+        "create_time": 1756222779.253913,
+        "file_name": "ItsiDefaultScheduledBackup-1756222779",
+        "search_head_id": "50A477EC-F6E6-4A05-B081-C0333275E51A"
+      },
+      {
+        "create_time": 1756165475.9556792,
+        "file_name": "ItsiDefaultScheduledBackup-1756165475",
+        "search_head_id": "50A477EC-F6E6-4A05-B081-C0333275E51A"
+      },
+      {
+        "create_time": 1756048022.2126138,
+        "file_name": "ItsiDefaultScheduledBackup-1756048022",
+        "search_head_id": "50A477EC-F6E6-4A05-B081-C0333275E51A"
+      },
+      {
+        "create_time": 1755961624.5497236,
+        "file_name": "ItsiDefaultScheduledBackup-1755961624",
+        "search_head_id": "50A477EC-F6E6-4A05-B081-C0333275E51A"
+      },
+      {
+        "create_time": 1755878824.2297482,
+        "file_name": "ItsiDefaultScheduledBackup-1755878824",
+        "search_head_id": "50A477EC-F6E6-4A05-B081-C0333275E51A"
+      },
+      {
+        "create_time": 1755875225.427202,
+        "file_name": "ItsiDefaultScheduledBackup-1755875225",
+        "search_head_id": "50A477EC-F6E6-4A05-B081-C0333275E51A"
+      }
+    ],
+    "enabled": 1,
+    "end_time": 1756309195.59467,
+    "frequency": "daily",
+    "identifying_name": "default scheduled backup",
+    "include_conf_files": 1,
+    "job_type": "Backup",
+    "keep_max_time": 604800,
+    "last_error": "None",
+    "mod_source": "unknown",
+    "mod_timestamp": "2025-08-28T06:41:01.870142+00:00",
+    "object_type": "backup_restore",
+    "scheduled": 1,
+    "scheduled_time": 1756393200.215205,
+    "search_head_id": "50A477EC-F6E6-4A05-B081-C0333275E51A",
+    "start_time": 1756309179.9750607,
+    "status": "Scheduled Daily",
+    "title": "Default Scheduled Backup"
+  }
+]
