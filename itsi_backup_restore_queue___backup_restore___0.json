@@ -6,6 +6,11 @@
     "_version": "4.20.1",
     "backup_history": [
       {
+        "create_time": 1756394740.804103,
+        "file_name": "ItsiDefaultScheduledBackup-1756394740",
+        "search_head_id": "50A477EC-F6E6-4A05-B081-C0333275E51A"
+      },
+      {
         "create_time": 1756309179.9750607,
         "file_name": "ItsiDefaultScheduledBackup-1756309179",
         "search_head_id": "50A477EC-F6E6-4A05-B081-C0333275E51A"
@@ -42,7 +47,7 @@
       }
     ],
     "enabled": 1,
-    "end_time": 1756309195.59467,
+    "end_time": 1756394755.976155,
     "frequency": "daily",
     "identifying_name": "default scheduled backup",
     "include_conf_files": 1,
@@ -50,12 +55,12 @@
     "keep_max_time": 604800,
     "last_error": "None",
     "mod_source": "unknown",
-    "mod_timestamp": "2025-08-28T06:42:56.890958+00:00",
+    "mod_timestamp": "2025-08-29T00:44:35.627836+00:00",
     "object_type": "backup_restore",
     "scheduled": 1,
-    "scheduled_time": 1756393200.215205,
+    "scheduled_time": 1756479600.215205,
     "search_head_id": "50A477EC-F6E6-4A05-B081-C0333275E51A",
-    "start_time": 1756309179.9750607,
+    "start_time": 1756394740.804103,
     "status": "Scheduled Daily",
     "title": "Default Scheduled Backup"
   }
