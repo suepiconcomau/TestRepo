@@ -205,29 +205,6 @@
     "obj_type": "correlation_search"
   },
   {
-    "_key": "5739b7b6-8417-11f0-ba61-000c295d5262",
-    "_user": "nobody",
-    "acl_id": "5739b7b6-8417-11f0-ba61-000c295d5262",
-    "acl_owner": "nobody",
-    "obj_acl": {
-      "delete": [
-        "*"
-      ],
-      "obj_owner": "nobody",
-      "read": [
-        "*"
-      ],
-      "write": [
-        "*"
-      ]
-    },
-    "obj_app": "itsi",
-    "obj_id": "High Scale EA Backfill",
-    "obj_shared_by_inclusion": true,
-    "obj_storename": "itsi_correlation_search",
-    "obj_type": "correlation_search"
-  },
-  {
     "_key": "62349eaa-6dab-11f0-9c76-000c295d5262",
     "_user": "nobody",
     "acl_id": "62349eaa-6dab-11f0-9c76-000c295d5262",

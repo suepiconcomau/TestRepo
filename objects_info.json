@@ -1,6 +1,6 @@
 {
   "itsi_object": {
-    "app_acl": 48,
+    "app_acl": 47,
     "app_capabilities": 1,
     "backup_restore": 1,
     "base_service_template": 4,
@@ -35,11 +35,11 @@
     "saved_page": 0,
     "service": 27,
     "team": 1,
-    "upgrade_readiness_prechecks": 48
+    "upgrade_readiness_prechecks": 52
   },
   "itsi_object_checksum": {
-    "checksum_metadata": "80adae6f784bdc8992f8530bc189c550b64141ad85ca1fafe611d9fb8a234963",
-    "checksum_size": "721af3dd94ef6a88ad0eb09a8d140f97b41c57cbcf14fbcf3c0e5b1b57300901"
+    "checksum_metadata": "a1c758e8da109f918b23693c28554d20316fe58c01f5b9e2fe0d3caf1e09ec7c",
+    "checksum_size": "1d97f5d0e656a642a45c4c480b8757c4b625cc795810b825a00eeae345bb842d"
   },
   "itsi_objects_info": [
     {

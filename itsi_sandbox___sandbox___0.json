@@ -11,7 +11,7 @@
     "description": "Default Service Sandbox for building service trees in ITSI",
     "identifying_name": "default service sandbox",
     "mod_source": "ITSI default import",
-    "mod_timestamp": "2025-08-26T00:40:02.203285+00:00",
+    "mod_timestamp": "2025-08-31T23:00:04.420873+00:00",
     "object_type": "sandbox",
     "status": 1,
     "title": "Default Service Sandbox"

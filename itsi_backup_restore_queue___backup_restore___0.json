@@ -6,6 +6,26 @@
     "_version": "4.20.1",
     "backup_history": [
       {
+        "create_time": 1756657554.8935654,
+        "file_name": "ItsiDefaultScheduledBackup-1756657554",
+        "search_head_id": "50A477EC-F6E6-4A05-B081-C0333275E51A"
+      },
+      {
+        "create_time": 1756653956.0842352,
+        "file_name": "ItsiDefaultScheduledBackup-1756653956",
+        "search_head_id": "50A477EC-F6E6-4A05-B081-C0333275E51A"
+      },
+      {
+        "create_time": 1756567553.5044045,
+        "file_name": "ItsiDefaultScheduledBackup-1756567553",
+        "search_head_id": "50A477EC-F6E6-4A05-B081-C0333275E51A"
+      },
+      {
+        "create_time": 1756481156.2697208,
+        "file_name": "ItsiDefaultScheduledBackup-1756481156",
+        "search_head_id": "50A477EC-F6E6-4A05-B081-C0333275E51A"
+      },
+      {
         "create_time": 1756394740.804103,
         "file_name": "ItsiDefaultScheduledBackup-1756394740",
         "search_head_id": "50A477EC-F6E6-4A05-B081-C0333275E51A"
@@ -24,30 +44,10 @@
         "create_time": 1756165475.9556792,
         "file_name": "ItsiDefaultScheduledBackup-1756165475",
         "search_head_id": "50A477EC-F6E6-4A05-B081-C0333275E51A"
-      },
-      {
-        "create_time": 1756048022.2126138,
-        "file_name": "ItsiDefaultScheduledBackup-1756048022",
-        "search_head_id": "50A477EC-F6E6-4A05-B081-C0333275E51A"
-      },
-      {
-        "create_time": 1755961624.5497236,
-        "file_name": "ItsiDefaultScheduledBackup-1755961624",
-        "search_head_id": "50A477EC-F6E6-4A05-B081-C0333275E51A"
-      },
-      {
-        "create_time": 1755878824.2297482,
-        "file_name": "ItsiDefaultScheduledBackup-1755878824",
-        "search_head_id": "50A477EC-F6E6-4A05-B081-C0333275E51A"
-      },
-      {
-        "create_time": 1755875225.427202,
-        "file_name": "ItsiDefaultScheduledBackup-1755875225",
-        "search_head_id": "50A477EC-F6E6-4A05-B081-C0333275E51A"
       }
     ],
     "enabled": 1,
-    "end_time": 1756394755.976155,
+    "end_time": 1756657575.2260442,
     "frequency": "daily",
     "identifying_name": "default scheduled backup",
     "include_conf_files": 1,
@@ -55,12 +55,12 @@
     "keep_max_time": 604800,
     "last_error": "None",
     "mod_source": "unknown",
-    "mod_timestamp": "2025-08-29T02:56:57.723476+00:00",
+    "mod_timestamp": "2025-09-01T00:55:10.889680+00:00",
     "object_type": "backup_restore",
     "scheduled": 1,
-    "scheduled_time": 1756479600.215205,
+    "scheduled_time": 1756738800.215205,
     "search_head_id": "50A477EC-F6E6-4A05-B081-C0333275E51A",
-    "start_time": 1756394740.804103,
+    "start_time": 1756657554.8935654,
     "status": "Scheduled Daily",
     "title": "Default Scheduled Backup"
   }
